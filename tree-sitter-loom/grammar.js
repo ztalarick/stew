@@ -1,5 +1,5 @@
 /**
- * @file Fasti grammar for tree-sitter
+ * @file Loom grammar for tree-sitter
  * @author Zach Talarick <ztalarick@gmail.com>
  * @license MIT
  */
