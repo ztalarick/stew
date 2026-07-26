@@ -1,0 +1,42 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "fasti",
+      "camelcase": "Fasti",
+      "title": "Fasti",
+      "scope": "source.fasti",
+      "file-types": [
+        ".fasti"
+      ],
+      "injection-regex": "^fasti$",
+      "class-name": "TreeSitterFasti"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Fasti grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Zach Talarick",
+        "email": "ztalarick@gmail.com",
+        "url": ""
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tree-sitter/tree-sitter-fasti",
+      "funding": ""
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": false,
+    "java": false,
+    "node": false,
+    "python": false,
+    "rust": true,
+    "swift": false,
+    "zig": false
+  }
+}

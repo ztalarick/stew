@@ -1,0 +1,138 @@
+let hello_world: str = "Hello World!";
+print(hello_world);
+
+fun echo(x: int) -> int {
+    x
+}
+
+fun add(x: int, y: int) -> int {
+    x + y
+}
+
+fun subtract(x: int, y: int) -> int {
+    x - y
+}
+
+fun negation(x: int) -> int {
+    let negative_one: int = -1;
+    x * negative_one
+}
+
+fun my_not(b: bool) -> bool {
+    not b
+}
+
+let x: int = 1;
+let y: int = 2;
+let pi: f64 = 3.14;
+
+negation(2);
+
+let does_work: bool = true;
+
+let does_not_work: bool = my_not(does_work);
+
+echo(x);
+
+let a: int = 5;
+let b: int = 10;
+let result: int = a + b * 2;
+let logic: bool = a < b and not false;
+let bit_shift: int = 1 << 3 | 2;
+
+// Comments!
+
+/*
+* multi-line
+*/
+
+// arrays
+let strs: [str; 4] = ["My", "name", "is", "Zach"];
+
+fun range_five() -> [int; 5] {
+    [1, 2, 3, 4, 5];
+}
+
+let empty: [int; 0] = [];
+
+let one: int = nums[0];
+
+let two: int = range_five()[add(1, 0)];
+
+// tuples
+let point: (int, int) = (5, 4);
+
+fun origin() -> (int, int) {
+    (0, 0)
+}
+
+fun nothing() -> () {
+
+}
+
+let unittype: () = ();
+
+// structs
+
+struct UserData {
+    id: int,
+    name: str
+}
+
+let henry: UserData = {id: 1, name: "henry"};
+let henrys_name: str = henry.name;
+
+// choices
+
+choice OptionInt {
+    | SomeInt(int)
+    | None
+}
+
+fun divide(x: int, y: int) -> OptionInt {
+    if y == 0{
+        return OptionInt.None
+    }
+    OptionInt.Some(x / y)
+}
+
+fun print_divide(x: int, y: int) -> () {
+    match divide(20, 5) {
+        | Some(result) -> print(result)
+        | None -> print("Can't divide by zero!")
+    }
+}
+
+print_divide(5 / 0);
+
+// references
+let ref: &int = &x;
+
+// anonymous function
+let mult: (int, int) -> int = (x: int, y: int) -> x * y;
+
+let nine: int = mult(3, 3);
+
+for i: int in rang_five() {
+    print(i);
+}
+
+let mut i: int = 0;
+while true {
+    if i >= 5 {
+        break;
+    }
+    print(rang_five()[i]);
+    i = i + 1;
+}
+
+let price_items: [(str, int); 3] = [("pogo_stick", 15), ("roller_skates", 30), ("keyboard", 50)];
+
+for item: str, price: int in price_items {
+    print(item);
+    print(price);
+
+    if item == "pogo_stick" {
+        print("I am buying!");
+    }
+}

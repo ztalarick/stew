@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "format": "prettier --write grammar.js"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6",
+    "tree-sitter-cli": "^0.26.11"
+  }
+}
