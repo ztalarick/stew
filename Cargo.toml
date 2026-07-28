@@ -1,6 +1,31 @@
-[package]
-name = "loom"
+[workspace]
+members = [
+    "crates/loom-core",
+    "crates/loom-parser",
+    "crates/loom-cli",
+    "crates/loom-lsp",
+    "tree-sitter-loom",
+]
+resolver = "2"
+
+[workspace.package]
 version = "0.1.0"
 edition = "2024"
+authors = ["Zach Talarick <ztalarick@gmail.com>"]
 
-[dependencies]
+[workspace.dependencies]
+loom-core = { path = "crates/loom-core" }
+loom-parser = { path = "crates/loom-parser" }
+
+# Parser
+tree-sitter-loom = { path = "tree-sitter-loom" }
+tree-sitter = "0.26.11"
+
+# CLI
+clap = { version = "4.6.4", features = ["derive"] }
+miette = { version = "7.6.0", features = ["fancy"] }
+thiserror = "2.0.19"
+
+# Logs/Trace
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }

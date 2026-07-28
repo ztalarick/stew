@@ -1,0 +1,7 @@
+[package]
+name = "loom-lsp"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+loom-core = { version = "0.1.0", path = "../loom-core" }
