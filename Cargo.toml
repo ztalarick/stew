@@ -1,10 +1,10 @@
 [workspace]
 members = [
-    "crates/loom-core",
-    "crates/loom-parser",
-    "crates/loom-cli",
-    "crates/loom-lsp",
-    "tree-sitter-loom",
+    "crates/stew-core",
+    "crates/stew-parser",
+    "crates/stew-cli",
+    "crates/stew-lsp",
+    "tree-sitter-stew",
 ]
 resolver = "2"
 
@@ -14,11 +14,11 @@ edition = "2024"
 authors = ["Zach Talarick <ztalarick@gmail.com>"]
 
 [workspace.dependencies]
-loom-core = { path = "crates/loom-core" }
-loom-parser = { path = "crates/loom-parser" }
+stew-core = { path = "crates/stew-core" }
+stew-parser = { path = "crates/stew-parser" }
 
 # Parser
-tree-sitter-loom = { path = "tree-sitter-loom" }
+tree-sitter-stew = { path = "tree-sitter-stew" }
 tree-sitter = "0.26.11"
 
 # CLI

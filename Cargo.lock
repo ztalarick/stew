@@ -261,40 +261,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0ceec5bc11778974d1bcb055b18002eba7f4b3518b6a0081b3af5f21666da9ad"
 
 [[package]]
-name = "loom-cli"
-version = "0.1.0"
-dependencies = [
- "clap",
- "loom-core",
- "loom-parser",
- "miette",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "loom-core"
-version = "0.1.0"
-
-[[package]]
-name = "loom-lsp"
-version = "0.1.0"
-dependencies = [
- "loom-core",
-]
-
-[[package]]
-name = "loom-parser"
-version = "0.1.0"
-dependencies = [
- "loom-core",
- "miette",
- "thiserror",
- "tree-sitter",
- "tree-sitter-loom",
-]
-
-[[package]]
 name = "matchers"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -521,6 +487,40 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ed6a63f02c8539c91a8685a86f4099661ba3da017932f6ebbea6de3f0fa7c90"
 
 [[package]]
+name = "stew-cli"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "miette",
+ "stew-core",
+ "stew-parser",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "stew-core"
+version = "0.1.0"
+
+[[package]]
+name = "stew-lsp"
+version = "0.1.0"
+dependencies = [
+ "stew-core",
+]
+
+[[package]]
+name = "stew-parser"
+version = "0.1.0"
+dependencies = [
+ "miette",
+ "stew-core",
+ "thiserror",
+ "tree-sitter",
+ "tree-sitter-stew",
+]
+
+[[package]]
 name = "streaming-iterator"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -706,7 +706,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "009994f150cc0cd50ff54917d5bc8bffe8cad10ca10d81c34da2ec421ae61782"
 
 [[package]]
-name = "tree-sitter-loom"
+name = "tree-sitter-stew"
 version = "0.1.0"
 dependencies = [
  "cc",

@@ -1,0 +1,13 @@
+[package]
+name = "stew-cli"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+stew-parser = { workspace = true }
+stew-core = { workspace = true }
+
+clap = { workspace = true }
+miette = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }

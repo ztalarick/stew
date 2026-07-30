@@ -1,0 +1,14 @@
+[package]
+name = "stew-parser"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+tree-sitter-stew = { workspace = true }
+stew-core = { workspace = true }
+
+tree-sitter = { workspace = true }
+
+miette = { workspace = true }
+thiserror = { workspace = true }

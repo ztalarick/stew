@@ -1,0 +1,7 @@
+[package]
+name = "stew-lsp"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+stew-core = { version = "0.1.0", path = "../stew-core" }
