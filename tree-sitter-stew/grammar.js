@@ -52,9 +52,9 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.block, $.struct_literal],
-    [$._statement, $.expression],
-    [$.tuple_literal, $.parameter_list],
-    [$.match_body, $.binary_expression],
+    [$._statement, $._expression],
+    [$.tuple_literal, $._parameter_list],
+    [$._match_body, $.binary_expression],
   ],
 
   rules: {
@@ -74,7 +74,7 @@ module.exports = grammar({
     _statement: ($) =>
       choice(
         // expression
-        $.expression_statement,
+        $._expression_statement,
 
         // control flow
         $.function_definition,
@@ -91,10 +91,10 @@ module.exports = grammar({
         //advanced definitions
         $.struct,
         $.choice_definition,
-        $.machine_declaration,
+        $.machine_definition,
       ),
 
-    _expression_statement: ($) => seq($.expression, ";"),
+    _expression_statement: ($) => seq($._expression, ";"),
 
     _expression: ($) =>
       choice(
@@ -133,7 +133,7 @@ module.exports = grammar({
         PREC.UNARY,
         seq(
           field("operator", choice("-", "not")),
-          field("argument", $.expression),
+          field("argument", $._expression),
         ),
       ),
 
@@ -143,9 +143,9 @@ module.exports = grammar({
         prec.left(
           PREC.MULTIPLY,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", choice("*", "/", "%")),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
 
@@ -153,9 +153,9 @@ module.exports = grammar({
         prec.left(
           PREC.OR,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", "or"),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
 
@@ -163,9 +163,9 @@ module.exports = grammar({
         prec.left(
           PREC.AND,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", "and"),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
 
@@ -173,9 +173,9 @@ module.exports = grammar({
         prec.left(
           PREC.COMPARE,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", choice("==", ">", "<", ">=", "<=", "!=")),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
 
@@ -183,9 +183,9 @@ module.exports = grammar({
         prec.left(
           PREC.SHIFT,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", choice("<<", ">>")),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
 
@@ -193,9 +193,9 @@ module.exports = grammar({
         prec.left(
           PREC.BITWISE_AND,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", "&"),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
 
@@ -203,9 +203,9 @@ module.exports = grammar({
         prec.left(
           PREC.BITWISE_OR,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", "|"),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
 
@@ -213,24 +213,31 @@ module.exports = grammar({
         prec.left(
           PREC.ADD,
           seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", choice("+", "-")),
-            field("right", $.expression),
+            field("right", $._expression),
           ),
         ),
       ),
 
     address_of: ($) =>
-      prec(PREC.UNARY, seq("&", optional("mut"), field("value", $.expression))),
+      prec(
+        PREC.UNARY,
+        seq(
+          "&",
+          optional(field("mutable", "mut")),
+          field("value", $._expression),
+        ),
+      ),
 
     // needs to support expression evaluating to array and index eval to positive int
     array_indexing: ($) =>
       prec.left(
         PREC.CALL,
         seq(
-          field("array", $.expression),
+          field("array", $._expression),
           "[",
-          field("index", $.expression),
+          field("index", $._expression),
           "]",
         ),
       ),
@@ -240,7 +247,7 @@ module.exports = grammar({
       prec.left(
         PREC.CALL,
         seq(
-          field("object", $.expression),
+          field("object", $._expression),
           ".",
           field("field", choice($.identifier, $.int_literal)),
         ),
@@ -251,11 +258,11 @@ module.exports = grammar({
     int_literal: ($) => /\d+/,
     float_literal: ($) => /\d+\.\d+/,
     bool_literal: ($) => choice("true", "false"),
-    array_literal: ($) => seq("[", commaSep($.expression), "]"),
-    tuple_literal: ($) => seq("(", commaSep($.expression), ")"),
+    array_literal: ($) => seq("[", commaSep($._expression), "]"),
+    tuple_literal: ($) => seq("(", commaSep($._expression), ")"),
 
     struct_field_initializer: ($) =>
-      seq(field("field", $.identifier), ":", field("value", $.expression)),
+      seq(field("field", $.identifier), ":", field("value", $._expression)),
     struct_literal: ($) => seq("{", commaSep($.struct_field_initializer), "}"),
 
     // VARIABLES AND ASSIGNMENT
@@ -266,15 +273,15 @@ module.exports = grammar({
         optional("mut"),
         field("name", $.identifier),
         ":",
-        field("type", $.type),
+        field("type", $._type),
       ),
 
     let_declaration: ($) =>
       seq(
         "let",
-        $.identifier_type_annotation,
+        field("identifier_type", $.identifier_type_annotation),
         "=",
-        field("value", $.expression),
+        field("value", $._expression),
         ";",
       ),
 
@@ -282,12 +289,12 @@ module.exports = grammar({
       seq(
         field("left", choice($.identifier, $.array_indexing, $.field_access)),
         "=",
-        field("right", $.expression),
+        field("right", $._expression),
         ";",
       ),
 
     // TYPES
-    type: ($) =>
+    _type: ($) =>
       choice(
         "int",
         "u8",
@@ -303,42 +310,73 @@ module.exports = grammar({
         $.function_type,
       ),
 
-    array_type: ($) => seq("[", $.type, optional(seq(";", $.int_literal)), "]"),
-    tuple_type: ($) => seq("(", commaSep($.type), ")"),
+    array_type: ($) =>
+      seq(
+        "[",
+        field("type", $._type),
+        optional(seq(";", field("length", $.int_literal))),
+        "]",
+      ),
+    tuple_type: ($) => seq("(", commaSep(field("types", $._type)), ")"),
 
     // This allows &int, &mut str, shared &[int; 4], etc.
     reference_type: ($) =>
-      seq(optional("shared"), "&", optional("mut"), $.type),
+      seq(
+        field("is_shared", optional("shared")),
+        "&",
+        field("is_mut", optional("mut")),
+        field("type", $._type),
+      ),
 
-    function_type: ($) => seq($.tuple_type, "->", $.type),
+    function_type: ($) =>
+      seq(
+        field("argument_types", $.tuple_type),
+        "->",
+        field("return_type", $._type),
+      ),
 
     // CONTROL FLOW
     function_definition: ($) =>
       seq(
         "fun",
         field("name", $.identifier),
-        field("parameters", $.parameter_list),
+        $._parameter_list,
         "->",
-        field("return_type", $.type),
+        field("return_type", $._type),
         field("body", $.block),
       ),
 
-    parameter_list: ($) =>
-      seq("(", commaSep($.identifier_type_annotation), ")"),
+    _parameter_list: ($) =>
+      seq(
+        "(",
+        commaSep(field("parameters", $.identifier_type_annotation)),
+        ")",
+      ),
 
-    block: ($) => seq("{", repeat($._statement), optional($.expression), "}"),
+    block: ($) =>
+      seq(
+        "{",
+        field("statements", repeat($._statement)),
+        optional(field("final_expression", $._expression)),
+        "}",
+      ),
 
     // this is for choice literals `Option.Some(5)` and function calls `print("hi")
     call_expression: ($) =>
       prec.left(
         PREC.CALL,
-        seq(field("callable", $.expression), "(", commaSep($.expression), ")"),
+        seq(
+          field("callable", $._expression),
+          "(",
+          commaSep(field("arguments", $._expression)),
+          ")",
+        ),
       ),
 
     if_else: ($) =>
       seq(
         "if",
-        field("condition", $.expression),
+        field("condition", $._expression),
         field("consequence", $.block),
         optional(seq("else", field("alternative", choice($.block, $.if_else)))),
       ),
@@ -346,9 +384,11 @@ module.exports = grammar({
     match_expression: ($) =>
       seq(
         "match",
-        field("value", $.expression),
+        field("value", $._expression),
         "{",
-        repeat(prec.left(PREC.BITWISE_OR, seq("|", $.match_case))),
+        repeat(
+          prec.left(PREC.BITWISE_OR, seq("|", field("cases", $.match_case))),
+        ),
         "}",
       ),
 
@@ -356,35 +396,35 @@ module.exports = grammar({
       prec(
         PREC.BITWISE_OR,
         seq(
-          field("pattern", $.expression),
-          optional(seq("if", field("guard", $.expression))),
+          field("pattern", $._expression),
+          optional(seq("if", field("guard", $._expression))),
           "->",
-          field("body", $.match_body),
+          field("body", $._match_body),
         ),
       ),
 
-    match_body: ($) => prec(PREC.BITWISE_OR, $.expression),
+    _match_body: ($) => prec(PREC.BITWISE_OR, $._expression),
 
     while_loop: ($) =>
-      seq("while", field("condition", $.expression), field("body", $.block)),
+      seq("while", field("condition", $._expression), field("body", $.block)),
 
     for_loop: ($) =>
       seq(
         "for",
         field("bindings", commaSep($.identifier_type_annotation)),
         "in",
-        field("iterator", $.expression),
+        field("iterator", $._expression),
         field("body", $.block),
       ),
 
     // Break can optionally take an expression to return a value from a loop
     break_expression: ($) =>
-      prec.right(seq("break", optional(field("value", $.expression)))),
+      prec.right(seq("break", optional(field("value", $._expression)))),
 
     continue_expression: ($) => "continue",
 
     return_expression: ($) =>
-      prec.right(seq("return", optional(field("value", $.expression)))),
+      prec.right(seq("return", optional(field("value", $._expression)))),
 
     wildcard_expression: ($) => "_",
 
@@ -395,15 +435,13 @@ module.exports = grammar({
         "struct",
         field("name", $.identifier),
         "{",
-        repeat(seq($.identifier_type_annotation, optional(","))),
+        repeat(
+          seq(field("fields", $.identifier_type_annotation), optional(",")),
+        ),
         "}",
       ),
     anonymous_function: ($) =>
-      seq(
-        field("parameters", $.parameter_list),
-        "->",
-        field("body", $.expression),
-      ),
+      seq($._parameter_list, "->", field("body", $._expression)),
 
     choice_variant: ($) =>
       seq(
@@ -413,7 +451,7 @@ module.exports = grammar({
           seq(
             field("name", $.identifier),
             "(",
-            field("types", commaSep1($.type)),
+            field("types", commaSep1($._type)),
             ")",
           ),
         ),
@@ -423,12 +461,12 @@ module.exports = grammar({
         "choice",
         field("name", $.identifier),
         "{",
-        repeat($.choice_variant),
+        field("choice_variants", repeat($.choice_variant)),
         "}",
       ),
 
     // MACHINE
-    machine_declaration: ($) =>
+    machine_definition: ($) =>
       seq(
         "machine",
         field("name", $.identifier),
@@ -440,10 +478,10 @@ module.exports = grammar({
         "{",
         repeat(
           choice(
-            $.event_declaration,
-            $.state_declaration,
-            $.machine_init,
-            $.machine_state_behavior,
+            field("events", $.event_declaration),
+            field("states", $.state_declaration),
+            field("initializers", $.machine_init),
+            field("state_behaviors", $.machine_state_behavior),
           ),
         ),
         "}",
@@ -451,27 +489,19 @@ module.exports = grammar({
 
     // `event AddItem(price: int)` or `event StartCheckout`
     event_declaration: ($) =>
-      seq(
-        "event",
-        field("name", $.identifier),
-        optional(field("parameters", $.parameter_list)),
-      ),
+      seq("event", field("name", $.identifier), optional($._parameter_list)),
 
     // `state Browsing(cart_id: int, item_count: int, subtotal: int)` or `state Terminated`
     state_declaration: ($) =>
-      seq(
-        "state",
-        field("name", $.identifier),
-        optional(field("parameters", $.parameter_list)),
-      ),
+      seq("state", field("name", $.identifier), optional($._parameter_list)),
 
     // `init(id: int) -> ShoppingCart { ... }`
     machine_init: ($) =>
       seq(
         "init",
-        field("parameters", $.parameter_list),
+        $._parameter_list,
         "->",
-        field("return_type", $.type),
+        field("return_type", $._type),
         field("body", $.block),
       ),
 
@@ -481,10 +511,10 @@ module.exports = grammar({
         "in",
         field("state", $.identifier),
 
-        optional(field("bindings", $.parameter_list)),
+        optional(field("bindings", $._parameter_list)),
         "{",
         // Inside an `in` block, we only allow `on` handlers
-        repeat($.machine_event_handler),
+        repeat(field("event_handlers", $.machine_event_handler)),
         "}",
       ),
 
@@ -493,13 +523,16 @@ module.exports = grammar({
     machine_event_handler: ($) =>
       seq(
         "on",
-        choice(
-          field("event", $.identifier),
-          "_", // Allows wildcard fallback
+        field(
+          "event",
+          choice(
+            $.identifier,
+            $.wildcard_expression, // Allows wildcard fallback
+          ),
         ),
-        optional(field("bindings", $.parameter_list)),
+        optional(field("bindings", $._parameter_list)),
         "->",
-        field("return_type", $.type),
+        field("return_type", $._type),
         field("body", $.block),
       ),
   },

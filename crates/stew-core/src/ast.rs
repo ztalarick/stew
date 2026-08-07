@@ -4,7 +4,7 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Span {
     pub start: usize,
-    pub end: usize
+    pub end: usize,
 }
 
 /// Node with the span it covers
@@ -37,7 +37,6 @@ pub type BoxExpr = Box<Spanned<Expression>>;
 pub type BoxStmt = Box<Spanned<Statement>>;
 pub type BoxAssignTarget = Box<Spanned<AssignTarget>>;
 pub type BoxType = Box<Spanned<Type>>;
-pub type TypedIdentifier = (String, Spanned<Type>);
 
 // ---------------------------------------------------------
 // TOP LEVEL
@@ -52,23 +51,19 @@ pub struct Program {
 pub enum Statement {
     /// expression with a semicolon: `do_something();`
     ExprStatement(BoxExpr),
-    
+
     // Control Flow
-    
     Function {
         name: String,
         parameters: Vec<TypedIdentifier>,
         return_type: Spanned<Type>,
         body: BoxExpr,
     },
-    
-    // Variables
 
+    // Variables
     /// let mut x: int = 5;
     LetDeclaration {
-        is_mut: bool,
-        identifier: String,
-        type_annotation: Spanned<Type>,
+        declaration: TypedIdentifier,
         value: BoxExpr,
     },
 
@@ -76,47 +71,70 @@ pub enum Statement {
         target: Spanned<AssignTarget>,
         value: BoxExpr,
     },
-    
+
     // Advanced Definitions
-    
+
     // $.struct,
-    Struct {
+    StructDefinition {
         name: String,
         field_types: Vec<TypedIdentifier>,
     },
 
-    Choice {
+    ChoiceDefinition {
         name: String,
-        choices: Vec<TypedIdentifier>,
+        choices: Vec<ChoiceVariant>,
     },
 
     // $.machine,
     Machine {
         name: String,
 
+        // Initililization logic
+        init: MachineInit,
+
         // Choice of events
-        events: Vec<(String, Vec<TypedIdentifier>)>,
+        events: Vec<MachineVariant>,
 
         // Choice of states
-        states: Vec<(String, Vec<TypedIdentifier>)>,
+        states: Vec<MachineVariant>,
 
         // State Behvaiors
         state_handlers: Vec<MachineStateHandler>,
+    },
+}
 
-    }
+#[derive(Debug, Clone)]
+pub struct ChoiceVariant {
+    pub name: String,
+    pub types: Vec<Spanned<Type>>,
 }
 
 #[derive(Debug, Clone)]
 pub struct MachineStateHandler {
-    pub state: Spanned<Expression>,
+    pub state: String,
+    pub bindings: Vec<TypedIdentifier>,
     pub event_handlers: Vec<MachineEventHandler>,
 }
 
 #[derive(Debug, Clone)]
 pub struct MachineEventHandler {
     pub event: Spanned<Expression>,
-    pub handler: Spanned<Expression> // anonymous function which must evaluate to a State
+    pub bindings: Vec<TypedIdentifier>,
+    pub return_type: Spanned<Type>,
+    pub body: BoxExpr,
+}
 
+#[derive(Debug, Clone)]
+pub struct MachineVariant {
+    pub name: String,
+    pub parameters: Vec<TypedIdentifier>,
+}
+
+#[derive(Debug, Clone)]
+pub struct MachineInit {
+    pub parameters: Vec<TypedIdentifier>,
+    pub return_type: Spanned<Type>,
+    pub body: BoxExpr,
 }
 
 /// Represents a location in memory that can be mutated
@@ -124,24 +142,31 @@ pub struct MachineEventHandler {
 pub enum AssignTarget {
     /// `x`
     Variable(String),
-    
+
     /// `target[index]`
     Index {
         target: BoxAssignTarget,
         index: BoxExpr,
     },
-    
+
     /// `target.field`
     StructField {
         target: BoxAssignTarget,
         field_name: String,
     },
-    
+
     /// `target.0`
     TupleField {
         target: BoxAssignTarget,
         index: usize,
-    }
+    },
+}
+
+#[derive(Debug, Clone)]
+pub struct TypedIdentifier {
+    pub is_mut: bool,
+    pub name: String,
+    pub var_type: Spanned<Type>,
 }
 
 // ---------------------------------------------------------
@@ -158,11 +183,10 @@ pub enum Expression {
     Array(Vec<Spanned<Expression>>),
     Tuple(Vec<Spanned<Expression>>),
     Struct {
-        fields: Vec<(String, Spanned<Expression>)>
+        fields: Vec<(String, Spanned<Expression>)>,
     },
 
     // Complex Expressions
-    
     /// Math & Logic:  left + right
     Binary {
         op: BinaryOperation,
@@ -177,29 +201,29 @@ pub enum Expression {
 
     ArrayIndex {
         target: BoxExpr,
-        index: BoxExpr
+        index: BoxExpr,
     },
-    
+
     Field {
         target: BoxExpr,
-        field: FieldName
+        field: FieldName,
     },
 
     /// &x
     AddressOf {
         is_mut: bool,
-        target: BoxExpr
+        target: BoxExpr,
     },
 
     Wildcard,
-    
+
     // Control flow
     Identifier(String),
 
     If {
         condition: BoxExpr,
         consequence: BoxExpr,
-        alternative: Option<BoxExpr>, 
+        alternative: Option<BoxExpr>,
     },
 
     Call {
@@ -210,7 +234,7 @@ pub enum Expression {
         statements: Vec<Spanned<Statement>>,
         final_expression: Option<BoxExpr>,
     },
-    
+
     AnonymousFunction {
         parameters: Vec<TypedIdentifier>,
         body: BoxExpr,
@@ -230,13 +254,12 @@ pub enum Expression {
     For {
         bindings: Vec<TypedIdentifier>,
         iterator: BoxExpr,
-        body: BoxExpr
+        body: BoxExpr,
     },
     While {
         condition: BoxExpr,
-        body: BoxExpr
+        body: BoxExpr,
     },
-    
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -269,7 +292,7 @@ pub enum BinaryOperation {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum UnaryOperation {
     Not,
-    Negative
+    Negative,
 }
 
 #[derive(Debug, Clone)]
@@ -300,7 +323,7 @@ pub enum Type {
     Char,
     Function {
         arguments: Vec<Spanned<Type>>,
-        return_type: BoxType
+        return_type: BoxType,
     },
     Tuple(Vec<Spanned<Type>>),
 
@@ -309,7 +332,7 @@ pub enum Type {
 
     Array {
         item: BoxType,
-        length: usize,
+        length: Option<usize>,
     },
 
     /// Custom structs, choices, or state machines
