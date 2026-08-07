@@ -1,0 +1,24 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"user.name\")"
+---
+Spanned {
+    node: Field {
+        target: Spanned {
+            node: Identifier(
+                "user",
+            ),
+            span: Span {
+                start: 18,
+                end: 22,
+            },
+        },
+        field: Named(
+            "name",
+        ),
+    },
+    span: Span {
+        start: 18,
+        end: 27,
+    },
+}

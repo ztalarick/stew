@@ -1,0 +1,41 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"print(\\\"hello\\\", 42)\")"
+---
+Spanned {
+    node: Call {
+        callable: Spanned {
+            node: Identifier(
+                "print",
+            ),
+            span: Span {
+                start: 18,
+                end: 23,
+            },
+        },
+        arguments: [
+            Spanned {
+                node: Str(
+                    "\"hello\"",
+                ),
+                span: Span {
+                    start: 24,
+                    end: 31,
+                },
+            },
+            Spanned {
+                node: Int(
+                    42,
+                ),
+                span: Span {
+                    start: 33,
+                    end: 35,
+                },
+            },
+        ],
+    },
+    span: Span {
+        start: 18,
+        end: 36,
+    },
+}

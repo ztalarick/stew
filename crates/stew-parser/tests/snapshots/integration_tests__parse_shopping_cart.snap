@@ -1,0 +1,1107 @@
+---
+source: crates/stew-parser/tests/integration_tests.rs
+expression: program
+---
+Program {
+    statements: [
+        Spanned {
+            node: Function {
+                name: "calculate_tax",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "amount",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 69,
+                                end: 72,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Int,
+                    span: Span {
+                        start: 77,
+                        end: 80,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: None,
+                    },
+                    span: Span {
+                        start: 81,
+                        end: 162,
+                    },
+                },
+            },
+            span: Span {
+                start: 43,
+                end: 162,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "generate_receipt",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "cart_id",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 241,
+                                end: 244,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Str,
+                    span: Span {
+                        start: 249,
+                        end: 252,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: None,
+                    },
+                    span: Span {
+                        start: 253,
+                        end: 284,
+                    },
+                },
+            },
+            span: Span {
+                start: 211,
+                end: 284,
+            },
+        },
+        Spanned {
+            node: Machine {
+                name: "ShoppingCart",
+                init: MachineInit {
+                    parameters: [
+                        TypedIdentifier {
+                            is_mut: false,
+                            name: "id",
+                            var_type: Spanned {
+                                node: Int,
+                                span: Span {
+                                    start: 773,
+                                    end: 776,
+                                },
+                            },
+                        },
+                    ],
+                    return_type: Spanned {
+                        node: Custom(
+                            "ShoppingCart",
+                        ),
+                        span: Span {
+                            start: 781,
+                            end: 793,
+                        },
+                    },
+                    body: Spanned {
+                        node: Block {
+                            statements: [],
+                            final_expression: Some(
+                                Spanned {
+                                    node: Call {
+                                        callable: Spanned {
+                                            node: Identifier(
+                                                "Browsing",
+                                            ),
+                                            span: Span {
+                                                start: 804,
+                                                end: 812,
+                                            },
+                                        },
+                                        arguments: [
+                                            Spanned {
+                                                node: Identifier(
+                                                    "id",
+                                                ),
+                                                span: Span {
+                                                    start: 813,
+                                                    end: 815,
+                                                },
+                                            },
+                                            Spanned {
+                                                node: Int(
+                                                    0,
+                                                ),
+                                                span: Span {
+                                                    start: 817,
+                                                    end: 818,
+                                                },
+                                            },
+                                            Spanned {
+                                                node: Int(
+                                                    0,
+                                                ),
+                                                span: Span {
+                                                    start: 820,
+                                                    end: 821,
+                                                },
+                                            },
+                                        ],
+                                    },
+                                    span: Span {
+                                        start: 804,
+                                        end: 822,
+                                    },
+                                },
+                            ),
+                        },
+                        span: Span {
+                            start: 794,
+                            end: 828,
+                        },
+                    },
+                },
+                events: [
+                    MachineVariant {
+                        name: "AddItem",
+                        parameters: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "price",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 370,
+                                        end: 373,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    MachineVariant {
+                        name: "StartCheckout",
+                        parameters: [],
+                    },
+                    MachineVariant {
+                        name: "ConfirmPayment",
+                        parameters: [],
+                    },
+                    MachineVariant {
+                        name: "DeleteCart",
+                        parameters: [],
+                    },
+                ],
+                states: [
+                    MachineVariant {
+                        name: "Browsing",
+                        parameters: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "cart_id",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 537,
+                                        end: 540,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "item_count",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 554,
+                                        end: 557,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "subtotal",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 569,
+                                        end: 572,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    MachineVariant {
+                        name: "CheckingOut",
+                        parameters: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "cart_id",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 605,
+                                        end: 608,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "final_total",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 623,
+                                        end: 626,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    MachineVariant {
+                        name: "Paid",
+                        parameters: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "receipt_id",
+                                var_type: Spanned {
+                                    node: Str,
+                                    span: Span {
+                                        start: 655,
+                                        end: 658,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "amount_paid",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 673,
+                                        end: 676,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    MachineVariant {
+                        name: "Terminated",
+                        parameters: [],
+                    },
+                ],
+                state_handlers: [
+                    MachineStateHandler {
+                        state: "Browsing",
+                        bindings: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "cart_id",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 878,
+                                        end: 881,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "item_count",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 895,
+                                        end: 898,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "subtotal",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 910,
+                                        end: 913,
+                                    },
+                                },
+                            },
+                        ],
+                        event_handlers: [
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "AddItem",
+                                    ),
+                                    span: Span {
+                                        start: 937,
+                                        end: 944,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 960,
+                                        end: 972,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "Browsing",
+                                                        ),
+                                                        span: Span {
+                                                            start: 1194,
+                                                            end: 1202,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "cart_id",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1203,
+                                                                end: 1210,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "new_count",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1212,
+                                                                end: 1221,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "new_subtotal",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1223,
+                                                                end: 1235,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 1194,
+                                                    end: 1236,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 973,
+                                        end: 1246,
+                                    },
+                                },
+                            },
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "StartCheckout",
+                                    ),
+                                    span: Span {
+                                        start: 1259,
+                                        end: 1272,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 1276,
+                                        end: 1288,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "CheckingOut",
+                                                        ),
+                                                        span: Span {
+                                                            start: 1540,
+                                                            end: 1551,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "cart_id",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1552,
+                                                                end: 1559,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "final_total",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1561,
+                                                                end: 1572,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 1540,
+                                                    end: 1573,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 1289,
+                                        end: 1583,
+                                    },
+                                },
+                            },
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "DeleteCart",
+                                    ),
+                                    span: Span {
+                                        start: 1596,
+                                        end: 1606,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 1610,
+                                        end: 1622,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Identifier(
+                                                    "Terminated",
+                                                ),
+                                                span: Span {
+                                                    start: 1684,
+                                                    end: 1694,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 1623,
+                                        end: 1704,
+                                    },
+                                },
+                            },
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "ConfirmPayment",
+                                    ),
+                                    span: Span {
+                                        start: 1717,
+                                        end: 1731,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 1735,
+                                        end: 1747,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "Browsing",
+                                                        ),
+                                                        span: Span {
+                                                            start: 1822,
+                                                            end: 1830,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "cart_id",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1831,
+                                                                end: 1838,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "item_count",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1840,
+                                                                end: 1850,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "subtotal",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1852,
+                                                                end: 1860,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 1822,
+                                                    end: 1861,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 1748,
+                                        end: 1871,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    MachineStateHandler {
+                        state: "CheckingOut",
+                        bindings: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "cart_id",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 1934,
+                                        end: 1937,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "final_total",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 1952,
+                                        end: 1955,
+                                    },
+                                },
+                            },
+                        ],
+                        event_handlers: [
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "ConfirmPayment",
+                                    ),
+                                    span: Span {
+                                        start: 1979,
+                                        end: 1993,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 1997,
+                                        end: 2009,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "Paid",
+                                                        ),
+                                                        span: Span {
+                                                            start: 2082,
+                                                            end: 2086,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "receipt",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2087,
+                                                                end: 2094,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "final_total",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2096,
+                                                                end: 2107,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 2082,
+                                                    end: 2108,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 2010,
+                                        end: 2118,
+                                    },
+                                },
+                            },
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "AddItem",
+                                    ),
+                                    span: Span {
+                                        start: 2131,
+                                        end: 2138,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 2154,
+                                        end: 2166,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "Browsing",
+                                                        ),
+                                                        span: Span {
+                                                            start: 2302,
+                                                            end: 2310,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "cart_id",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2311,
+                                                                end: 2318,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Int(
+                                                                1,
+                                                            ),
+                                                            span: Span {
+                                                                start: 2320,
+                                                                end: 2321,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "price",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2323,
+                                                                end: 2328,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 2302,
+                                                    end: 2329,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 2167,
+                                        end: 2339,
+                                    },
+                                },
+                            },
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "DeleteCart",
+                                    ),
+                                    span: Span {
+                                        start: 2352,
+                                        end: 2362,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 2366,
+                                        end: 2378,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Identifier(
+                                                    "Terminated",
+                                                ),
+                                                span: Span {
+                                                    start: 2393,
+                                                    end: 2403,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 2379,
+                                        end: 2413,
+                                    },
+                                },
+                            },
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Wildcard,
+                                    span: Span {
+                                        start: 2426,
+                                        end: 2427,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 2431,
+                                        end: 2443,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "CheckingOut",
+                                                        ),
+                                                        span: Span {
+                                                            start: 2457,
+                                                            end: 2468,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "cart_id",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2469,
+                                                                end: 2476,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "final_total",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2478,
+                                                                end: 2489,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 2457,
+                                                    end: 2490,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 2443,
+                                        end: 2500,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    MachineStateHandler {
+                        state: "Paid",
+                        bindings: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "receipt_id",
+                                var_type: Spanned {
+                                    node: Str,
+                                    span: Span {
+                                        start: 2551,
+                                        end: 2554,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "amount_paid",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 2569,
+                                        end: 2572,
+                                    },
+                                },
+                            },
+                        ],
+                        event_handlers: [
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Identifier(
+                                        "DeleteCart",
+                                    ),
+                                    span: Span {
+                                        start: 2596,
+                                        end: 2606,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 2610,
+                                        end: 2622,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Identifier(
+                                                    "Terminated",
+                                                ),
+                                                span: Span {
+                                                    start: 2637,
+                                                    end: 2647,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 2623,
+                                        end: 2657,
+                                    },
+                                },
+                            },
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Wildcard,
+                                    span: Span {
+                                        start: 2670,
+                                        end: 2671,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 2675,
+                                        end: 2687,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "Paid",
+                                                        ),
+                                                        span: Span {
+                                                            start: 2758,
+                                                            end: 2762,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "receipt_id",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2763,
+                                                                end: 2773,
+                                                            },
+                                                        },
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "amount_paid",
+                                                            ),
+                                                            span: Span {
+                                                                start: 2775,
+                                                                end: 2786,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 2758,
+                                                    end: 2787,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 2688,
+                                        end: 2797,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                    MachineStateHandler {
+                        state: "Terminated",
+                        bindings: [],
+                        event_handlers: [
+                            MachineEventHandler {
+                                event: Spanned {
+                                    node: Wildcard,
+                                    span: Span {
+                                        start: 3017,
+                                        end: 3018,
+                                    },
+                                },
+                                bindings: [],
+                                return_type: Spanned {
+                                    node: Custom(
+                                        "ShoppingCart",
+                                    ),
+                                    span: Span {
+                                        start: 3022,
+                                        end: 3034,
+                                    },
+                                },
+                                body: Spanned {
+                                    node: Block {
+                                        statements: [],
+                                        final_expression: Some(
+                                            Spanned {
+                                                node: Identifier(
+                                                    "Terminated",
+                                                ),
+                                                span: Span {
+                                                    start: 3049,
+                                                    end: 3059,
+                                                },
+                                            },
+                                        ),
+                                    },
+                                    span: Span {
+                                        start: 3035,
+                                        end: 3069,
+                                    },
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+            span: Span {
+                start: 286,
+                end: 3077,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "handle_user_request",
+                parameters: [],
+                return_type: Spanned {
+                    node: Tuple(
+                        [],
+                    ),
+                    span: Span {
+                        start: 3108,
+                        end: 3110,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: None,
+                    },
+                    span: Span {
+                        start: 3111,
+                        end: 4423,
+                    },
+                },
+            },
+            span: Span {
+                start: 3079,
+                end: 4423,
+            },
+        },
+    ],
+}

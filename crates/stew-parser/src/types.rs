@@ -77,3 +77,28 @@ pub(crate) fn parse_type(
 
     Ok(ast::Spanned::new(ty, node.start_byte(), node.end_byte()))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::parse_cst;
+    use insta::assert_debug_snapshot;
+
+    fn parse_ty(source: &str) -> ast::Spanned<ast::Type> {
+        let formatted = format!("let x: {} = 0;", source);
+        let tree = parse_cst(&formatted).unwrap();
+        let root = tree.root_node();
+        let stmt = root.child(0).unwrap();
+        let id_type = stmt.child_by_field_name("identifier_type").unwrap();
+        let ty_node = id_type.child_by_field_name("type").unwrap();
+        parse_type(ty_node, formatted.as_bytes()).unwrap()
+    }
+
+    #[test]
+    fn test_types() {
+        assert_debug_snapshot!(parse_ty("int"));
+        assert_debug_snapshot!(parse_ty("str"));
+        assert_debug_snapshot!(parse_ty("&mut User"));
+        assert_debug_snapshot!(parse_ty("[int; 4]"));
+    }
+}

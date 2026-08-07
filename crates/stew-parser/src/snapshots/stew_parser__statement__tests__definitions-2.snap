@@ -1,0 +1,37 @@
+---
+source: crates/stew-parser/src/statement.rs
+expression: "parse_stmt(\"struct User { id: int, name: str }\")"
+---
+Spanned {
+    node: StructDefinition {
+        name: "User",
+        field_types: [
+            TypedIdentifier {
+                is_mut: false,
+                name: "id",
+                var_type: Spanned {
+                    node: Int,
+                    span: Span {
+                        start: 18,
+                        end: 21,
+                    },
+                },
+            },
+            TypedIdentifier {
+                is_mut: false,
+                name: "name",
+                var_type: Spanned {
+                    node: Str,
+                    span: Span {
+                        start: 29,
+                        end: 32,
+                    },
+                },
+            },
+        ],
+    },
+    span: Span {
+        start: 0,
+        end: 34,
+    },
+}

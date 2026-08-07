@@ -1,0 +1,23 @@
+---
+source: crates/stew-parser/src/types.rs
+expression: "parse_ty(\"&mut User\")"
+---
+Spanned {
+    node: Reference {
+        is_mut: true,
+        is_shared: false,
+        inner: Spanned {
+            node: Custom(
+                "User",
+            ),
+            span: Span {
+                start: 12,
+                end: 16,
+            },
+        },
+    },
+    span: Span {
+        start: 7,
+        end: 16,
+    },
+}

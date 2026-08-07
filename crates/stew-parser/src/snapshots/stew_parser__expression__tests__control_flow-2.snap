@@ -1,0 +1,106 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"match x { | Option.Some(v) -> v | Option.None -> 0 }\")"
+---
+Spanned {
+    node: Match {
+        target: Spanned {
+            node: Identifier(
+                "x",
+            ),
+            span: Span {
+                start: 24,
+                end: 25,
+            },
+        },
+        options: [
+            MatchCase {
+                pattern: Spanned {
+                    node: Call {
+                        callable: Spanned {
+                            node: Field {
+                                target: Spanned {
+                                    node: Identifier(
+                                        "Option",
+                                    ),
+                                    span: Span {
+                                        start: 30,
+                                        end: 36,
+                                    },
+                                },
+                                field: Named(
+                                    "Some",
+                                ),
+                            },
+                            span: Span {
+                                start: 30,
+                                end: 41,
+                            },
+                        },
+                        arguments: [
+                            Spanned {
+                                node: Identifier(
+                                    "v",
+                                ),
+                                span: Span {
+                                    start: 42,
+                                    end: 43,
+                                },
+                            },
+                        ],
+                    },
+                    span: Span {
+                        start: 30,
+                        end: 44,
+                    },
+                },
+                guard: None,
+                body: Spanned {
+                    node: Identifier(
+                        "v",
+                    ),
+                    span: Span {
+                        start: 48,
+                        end: 49,
+                    },
+                },
+            },
+            MatchCase {
+                pattern: Spanned {
+                    node: Field {
+                        target: Spanned {
+                            node: Identifier(
+                                "Option",
+                            ),
+                            span: Span {
+                                start: 52,
+                                end: 58,
+                            },
+                        },
+                        field: Named(
+                            "None",
+                        ),
+                    },
+                    span: Span {
+                        start: 52,
+                        end: 63,
+                    },
+                },
+                guard: None,
+                body: Spanned {
+                    node: Int(
+                        0,
+                    ),
+                    span: Span {
+                        start: 67,
+                        end: 68,
+                    },
+                },
+            },
+        ],
+    },
+    span: Span {
+        start: 18,
+        end: 70,
+    },
+}

@@ -1,0 +1,47 @@
+---
+source: crates/stew-parser/src/statement.rs
+expression: "parse_stmt(\"arr[0] = 5;\")"
+---
+Spanned {
+    node: Assignment {
+        target: Spanned {
+            node: Index {
+                target: Spanned {
+                    node: Variable(
+                        "arr",
+                    ),
+                    span: Span {
+                        start: 0,
+                        end: 3,
+                    },
+                },
+                index: Spanned {
+                    node: Int(
+                        0,
+                    ),
+                    span: Span {
+                        start: 4,
+                        end: 5,
+                    },
+                },
+            },
+            span: Span {
+                start: 0,
+                end: 6,
+            },
+        },
+        value: Spanned {
+            node: Int(
+                5,
+            ),
+            span: Span {
+                start: 9,
+                end: 10,
+            },
+        },
+    },
+    span: Span {
+        start: 0,
+        end: 11,
+    },
+}

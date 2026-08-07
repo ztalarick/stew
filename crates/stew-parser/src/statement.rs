@@ -36,7 +36,8 @@ pub(crate) fn parse_statement(
                 body,
             }
         }
-        "if_else" | "block" | "for_loop" | "while_loop" | "match_expression" => {
+        "if_else" | "block" | "for_loop" | "while_loop" | "match_expression"
+        | "call_expression" => {
             let expr = expression::parse_expression(node, source)?;
             ast::Statement::ExprStatement(Box::new(expr))
         }
@@ -109,7 +110,7 @@ fn parse_assign_target(
     source: &[u8],
 ) -> Result<ast::Spanned<ast::AssignTarget>, ParseError> {
     let target = match node.kind() {
-        "identifier" => ast::AssignTarget::Variable(node.get_child_field_text("name", source)?),
+        "identifier" => ast::AssignTarget::Variable(node.get_text(source)?),
 
         "array_indexing" => {
             let array_node = node.get_child_field("array")?;
@@ -184,4 +185,51 @@ fn parse_choice_variant(
         .collect::<Result<Vec<_>, ParseError>>()?;
 
     Ok(ast::ChoiceVariant { name, types })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::parse_cst;
+    use insta::assert_debug_snapshot;
+
+    fn parse_stmt(source: &str) -> ast::Spanned<ast::Statement> {
+        let tree = parse_cst(&source.to_string()).unwrap();
+        let root = tree.root_node();
+        let stmt_node = root.child(0).unwrap();
+        parse_statement(stmt_node, source.as_bytes()).unwrap()
+    }
+
+    #[test]
+    fn test_let_declaration() {
+        assert_debug_snapshot!(parse_stmt("let x: int = 5;"));
+        assert_debug_snapshot!(parse_stmt("let mut y: str = \"hello\";"));
+    }
+
+    #[test]
+    fn test_definitions() {
+        assert_debug_snapshot!(parse_stmt("fun my_func(a: int) -> int { a + 1 }"));
+        assert_debug_snapshot!(parse_stmt("struct User { id: int, name: str }"));
+        assert_debug_snapshot!(parse_stmt("choice Option { | Some(int) | None }"));
+    }
+
+    #[test]
+    fn test_assignment() {
+        assert_debug_snapshot!(parse_stmt("x = 10;"));
+        assert_debug_snapshot!(parse_stmt("arr[0] = 5;"));
+        assert_debug_snapshot!(parse_stmt("user.name = \"John\";"));
+    }
+
+    fn parse_stmt_err(source: &str) -> crate::ParseError {
+        let tree = parse_cst(&source.to_string()).unwrap();
+        let root = tree.root_node();
+        let stmt_node = root.child(0).unwrap();
+        parse_statement(stmt_node, source.as_bytes()).unwrap_err()
+    }
+
+    #[test]
+    fn test_errors() {
+        // Invalid assignment target
+        assert_debug_snapshot!(parse_stmt_err("10 = x;"));
+    }
 }

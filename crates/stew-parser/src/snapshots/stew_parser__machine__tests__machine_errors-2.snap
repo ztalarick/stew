@@ -1,0 +1,14 @@
+---
+source: crates/stew-parser/src/machine.rs
+expression: "parse_mach_err(\"\n            machine BadMachine {\n                init() -> BadMachine { Red }\n                init() -> BadMachine { Blue }\n            }\n        \")"
+---
+ParseError {
+    message: "A state machine can only have one initialization block",
+    err_span: SourceSpan {
+        offset: SourceOffset(
+            95,
+        ),
+        length: 29,
+    },
+    label: "Remove this duplicate init block",
+}

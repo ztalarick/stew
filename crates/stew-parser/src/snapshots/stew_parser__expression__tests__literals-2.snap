@@ -1,0 +1,13 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"3.14\")"
+---
+Spanned {
+    node: Float(
+        3.14,
+    ),
+    span: Span {
+        start: 18,
+        end: 22,
+    },
+}

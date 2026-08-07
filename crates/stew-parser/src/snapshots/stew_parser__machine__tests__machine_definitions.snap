@@ -1,0 +1,151 @@
+---
+source: crates/stew-parser/src/machine.rs
+expression: "parse_mach(\"\n            machine StopLight {\n                event Toggle\n                state Red\n                state Green\n                \n                init() -> StopLight { Red }\n                \n                in Red {\n                    on Toggle -> StopLight { Green }\n                }\n                \n                in Green {\n                    on Toggle -> StopLight { Red }\n                }\n            }\n        \")"
+---
+Machine {
+    name: "StopLight",
+    init: MachineInit {
+        parameters: [],
+        return_type: Spanned {
+            node: Custom(
+                "StopLight",
+            ),
+            span: Span {
+                start: 159,
+                end: 168,
+            },
+        },
+        body: Spanned {
+            node: Block {
+                statements: [],
+                final_expression: Some(
+                    Spanned {
+                        node: Identifier(
+                            "Red",
+                        ),
+                        span: Span {
+                            start: 171,
+                            end: 174,
+                        },
+                    },
+                ),
+            },
+            span: Span {
+                start: 169,
+                end: 176,
+            },
+        },
+    },
+    events: [
+        MachineVariant {
+            name: "Toggle",
+            parameters: [],
+        },
+    ],
+    states: [
+        MachineVariant {
+            name: "Red",
+            parameters: [],
+        },
+        MachineVariant {
+            name: "Green",
+            parameters: [],
+        },
+    ],
+    state_handlers: [
+        MachineStateHandler {
+            state: "Red",
+            bindings: [],
+            event_handlers: [
+                MachineEventHandler {
+                    event: Spanned {
+                        node: Identifier(
+                            "Toggle",
+                        ),
+                        span: Span {
+                            start: 242,
+                            end: 248,
+                        },
+                    },
+                    bindings: [],
+                    return_type: Spanned {
+                        node: Custom(
+                            "StopLight",
+                        ),
+                        span: Span {
+                            start: 252,
+                            end: 261,
+                        },
+                    },
+                    body: Spanned {
+                        node: Block {
+                            statements: [],
+                            final_expression: Some(
+                                Spanned {
+                                    node: Identifier(
+                                        "Green",
+                                    ),
+                                    span: Span {
+                                        start: 264,
+                                        end: 269,
+                                    },
+                                },
+                            ),
+                        },
+                        span: Span {
+                            start: 262,
+                            end: 271,
+                        },
+                    },
+                },
+            ],
+        },
+        MachineStateHandler {
+            state: "Green",
+            bindings: [],
+            event_handlers: [
+                MachineEventHandler {
+                    event: Spanned {
+                        node: Identifier(
+                            "Toggle",
+                        ),
+                        span: Span {
+                            start: 357,
+                            end: 363,
+                        },
+                    },
+                    bindings: [],
+                    return_type: Spanned {
+                        node: Custom(
+                            "StopLight",
+                        ),
+                        span: Span {
+                            start: 367,
+                            end: 376,
+                        },
+                    },
+                    body: Spanned {
+                        node: Block {
+                            statements: [],
+                            final_expression: Some(
+                                Spanned {
+                                    node: Identifier(
+                                        "Red",
+                                    ),
+                                    span: Span {
+                                        start: 379,
+                                        end: 382,
+                                    },
+                                },
+                            ),
+                        },
+                        span: Span {
+                            start: 377,
+                            end: 384,
+                        },
+                    },
+                },
+            ],
+        },
+    ],
+}

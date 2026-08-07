@@ -1,0 +1,41 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"[1, 2, 3]\")"
+---
+Spanned {
+    node: Array(
+        [
+            Spanned {
+                node: Int(
+                    1,
+                ),
+                span: Span {
+                    start: 19,
+                    end: 20,
+                },
+            },
+            Spanned {
+                node: Int(
+                    2,
+                ),
+                span: Span {
+                    start: 22,
+                    end: 23,
+                },
+            },
+            Spanned {
+                node: Int(
+                    3,
+                ),
+                span: Span {
+                    start: 25,
+                    end: 26,
+                },
+            },
+        ],
+    ),
+    span: Span {
+        start: 18,
+        end: 27,
+    },
+}

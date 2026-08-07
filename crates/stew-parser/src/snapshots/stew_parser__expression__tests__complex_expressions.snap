@@ -1,0 +1,31 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"1 + 2 * 3\")"
+---
+Spanned {
+    node: Binary {
+        op: Add,
+        left: Spanned {
+            node: Int(
+                1,
+            ),
+            span: Span {
+                start: 18,
+                end: 19,
+            },
+        },
+        right: Spanned {
+            node: Int(
+                1,
+            ),
+            span: Span {
+                start: 18,
+                end: 19,
+            },
+        },
+    },
+    span: Span {
+        start: 18,
+        end: 27,
+    },
+}

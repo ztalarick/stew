@@ -1,0 +1,22 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"-x\")"
+---
+Spanned {
+    node: Unary {
+        op: Negative,
+        operand: Spanned {
+            node: Identifier(
+                "x",
+            ),
+            span: Span {
+                start: 19,
+                end: 20,
+            },
+        },
+    },
+    span: Span {
+        start: 18,
+        end: 20,
+    },
+}

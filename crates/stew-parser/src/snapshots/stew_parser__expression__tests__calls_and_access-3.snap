@@ -1,0 +1,30 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"arr[0]\")"
+---
+Spanned {
+    node: ArrayIndex {
+        target: Spanned {
+            node: Identifier(
+                "arr",
+            ),
+            span: Span {
+                start: 18,
+                end: 21,
+            },
+        },
+        index: Spanned {
+            node: Int(
+                0,
+            ),
+            span: Span {
+                start: 22,
+                end: 23,
+            },
+        },
+    },
+    span: Span {
+        start: 18,
+        end: 24,
+    },
+}

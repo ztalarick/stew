@@ -1,0 +1,23 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"return 5\")"
+---
+Spanned {
+    node: Break(
+        Some(
+            Spanned {
+                node: Int(
+                    5,
+                ),
+                span: Span {
+                    start: 25,
+                    end: 26,
+                },
+            },
+        ),
+    ),
+    span: Span {
+        start: 18,
+        end: 26,
+    },
+}

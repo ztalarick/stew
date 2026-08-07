@@ -32,7 +32,7 @@ pub(crate) fn parse_expression(
         "array_literal" => {
             let mut cursor = node.walk();
             let array = node
-                .children(&mut cursor)
+                .children_by_field_name("elements", &mut cursor)
                 .map(|child| parse_expression(child, source))
                 .collect::<Result<Vec<_>, _>>()?;
 
@@ -41,7 +41,7 @@ pub(crate) fn parse_expression(
         "tuple_literal" => {
             let mut cursor = node.walk();
             let tuple = node
-                .children(&mut cursor)
+                .children_by_field_name("elements", &mut cursor)
                 .map(|child| parse_expression(child, source))
                 .collect::<Result<Vec<_>, _>>()?;
 
@@ -50,7 +50,7 @@ pub(crate) fn parse_expression(
         "struct_literal" => {
             let mut fields = vec![];
             let mut cursor = node.walk();
-            let children = node.children(&mut cursor);
+            let children = node.children_by_field_name("fields", &mut cursor);
             for child in children {
                 if child.kind() == "struct_field_initializer" {
                     let field_node = child.get_child_field("field")?;
@@ -367,4 +367,67 @@ fn parse_match_case(node: tree_sitter::Node, source: &[u8]) -> Result<ast::Match
         guard,
         body,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::parse_cst;
+    use insta::assert_debug_snapshot;
+
+    fn parse_expr(source: &str) -> ast::Spanned<ast::Expression> {
+        let formatted = format!("let _dummy: int = {};", source);
+        let tree = parse_cst(&formatted).unwrap();
+        let root = tree.root_node();
+        let let_node = root.child(0).unwrap();
+        let expr_node = let_node.child_by_field_name("value").unwrap();
+        parse_expression(expr_node, formatted.as_bytes()).unwrap()
+    }
+
+    #[test]
+    fn test_literals() {
+        assert_debug_snapshot!(parse_expr("42"));
+        assert_debug_snapshot!(parse_expr("3.14"));
+        assert_debug_snapshot!(parse_expr("true"));
+        assert_debug_snapshot!(parse_expr(r#""hello""#));
+        assert_debug_snapshot!(parse_expr("[1, 2, 3]"));
+        assert_debug_snapshot!(parse_expr("{ id: 1, name: \"test\" }"));
+    }
+
+    #[test]
+    fn test_complex_expressions() {
+        assert_debug_snapshot!(parse_expr("1 + 2 * 3"));
+        assert_debug_snapshot!(parse_expr("a == b and c != d"));
+        assert_debug_snapshot!(parse_expr("-x"));
+        assert_debug_snapshot!(parse_expr("not true"));
+    }
+
+    #[test]
+    fn test_control_flow() {
+        assert_debug_snapshot!(parse_expr("if x > 5 { 1 } else { 0 }"));
+        assert_debug_snapshot!(parse_expr(
+            "match x { | Option.Some(v) -> v | Option.None -> 0 }"
+        ));
+        assert_debug_snapshot!(parse_expr("for x: int in arr { print(x); }"));
+        assert_debug_snapshot!(parse_expr("while true { break; }"));
+    }
+
+    #[test]
+    fn test_calls_and_access() {
+        assert_debug_snapshot!(parse_expr("print(\"hello\", 42)"));
+        assert_debug_snapshot!(parse_expr("user.name"));
+        assert_debug_snapshot!(parse_expr("arr[0]"));
+        assert_debug_snapshot!(parse_expr("tuple.1"));
+    }
+
+    #[test]
+    fn test_edge_cases() {
+        assert_debug_snapshot!(parse_expr("&x"));
+        assert_debug_snapshot!(parse_expr("&mut x"));
+        assert_debug_snapshot!(parse_expr("(x: int) -> x + 1"));
+        assert_debug_snapshot!(parse_expr("return 5"));
+        assert_debug_snapshot!(parse_expr("break 10"));
+        assert_debug_snapshot!(parse_expr("match x { | Option.Some(v) if v > 5 -> v }"));
+        assert_debug_snapshot!(parse_expr("(1, \"hello\")"));
+    }
 }

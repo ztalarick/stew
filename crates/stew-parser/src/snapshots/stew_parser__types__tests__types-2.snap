@@ -1,0 +1,11 @@
+---
+source: crates/stew-parser/src/types.rs
+expression: "parse_ty(\"str\")"
+---
+Spanned {
+    node: Str,
+    span: Span {
+        start: 7,
+        end: 10,
+    },
+}

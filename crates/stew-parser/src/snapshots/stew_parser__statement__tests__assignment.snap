@@ -1,0 +1,30 @@
+---
+source: crates/stew-parser/src/statement.rs
+expression: "parse_stmt(\"x = 10;\")"
+---
+Spanned {
+    node: Assignment {
+        target: Spanned {
+            node: Variable(
+                "x",
+            ),
+            span: Span {
+                start: 0,
+                end: 1,
+            },
+        },
+        value: Spanned {
+            node: Int(
+                10,
+            ),
+            span: Span {
+                start: 4,
+                end: 6,
+            },
+        },
+    },
+    span: Span {
+        start: 0,
+        end: 7,
+    },
+}

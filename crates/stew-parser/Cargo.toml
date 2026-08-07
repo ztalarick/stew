@@ -12,3 +12,6 @@ tree-sitter = { workspace = true }
 
 miette = { workspace = true }
 thiserror = { workspace = true }
+
+[dev-dependencies]
+insta = "1.48.0"

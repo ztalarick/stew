@@ -258,12 +258,15 @@ module.exports = grammar({
     int_literal: ($) => /\d+/,
     float_literal: ($) => /\d+\.\d+/,
     bool_literal: ($) => choice("true", "false"),
-    array_literal: ($) => seq("[", commaSep($._expression), "]"),
-    tuple_literal: ($) => seq("(", commaSep($._expression), ")"),
+    array_literal: ($) =>
+      seq("[", commaSep(field("elements", $._expression)), "]"),
+    tuple_literal: ($) =>
+      seq("(", commaSep(field("elements", $._expression)), ")"),
 
     struct_field_initializer: ($) =>
       seq(field("field", $.identifier), ":", field("value", $._expression)),
-    struct_literal: ($) => seq("{", commaSep($.struct_field_initializer), "}"),
+    struct_literal: ($) =>
+      seq("{", commaSep(field("fields", $.struct_field_initializer)), "}"),
 
     // VARIABLES AND ASSIGNMENT
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
@@ -411,7 +414,7 @@ module.exports = grammar({
     for_loop: ($) =>
       seq(
         "for",
-        field("bindings", commaSep($.identifier_type_annotation)),
+        commaSep(field("bindings", $.identifier_type_annotation)),
         "in",
         field("iterator", $._expression),
         field("body", $.block),
@@ -451,7 +454,7 @@ module.exports = grammar({
           seq(
             field("name", $.identifier),
             "(",
-            field("types", commaSep1($._type)),
+            commaSep1(field("types", $._type)),
             ")",
           ),
         ),

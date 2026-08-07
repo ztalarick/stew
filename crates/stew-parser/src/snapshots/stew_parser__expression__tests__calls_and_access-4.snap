@@ -1,0 +1,24 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"tuple.1\")"
+---
+Spanned {
+    node: Field {
+        target: Spanned {
+            node: Identifier(
+                "tuple",
+            ),
+            span: Span {
+                start: 18,
+                end: 23,
+            },
+        },
+        field: Index(
+            1,
+        ),
+    },
+    span: Span {
+        start: 18,
+        end: 25,
+    },
+}

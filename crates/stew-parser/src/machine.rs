@@ -201,3 +201,69 @@ fn parse_machine_event_handler(
         body,
     })
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::parse_cst;
+    use insta::assert_debug_snapshot;
+
+    fn parse_mach(source: &str) -> ast::Statement {
+        let tree = parse_cst(&source.to_string()).unwrap();
+        let root = tree.root_node();
+        let stmt_node = root.child(0).unwrap();
+        parse_machine(stmt_node, source.as_bytes()).unwrap()
+    }
+
+    #[test]
+    fn test_machine_definitions() {
+        assert_debug_snapshot!(parse_mach(
+            "
+            machine StopLight {
+                event Toggle
+                state Red
+                state Green
+                
+                init() -> StopLight { Red }
+                
+                in Red {
+                    on Toggle -> StopLight { Green }
+                }
+                
+                in Green {
+                    on Toggle -> StopLight { Red }
+                }
+            }
+        "
+        ));
+    }
+
+    fn parse_mach_err(source: &str) -> crate::ParseError {
+        let tree = parse_cst(&source.to_string()).unwrap();
+        let root = tree.root_node();
+        let stmt_node = root.child(0).unwrap();
+        parse_machine(stmt_node, source.as_bytes()).unwrap_err()
+    }
+
+    #[test]
+    fn test_machine_errors() {
+        // Missing init block
+        assert_debug_snapshot!(parse_mach_err(
+            "
+            machine BadMachine {
+                state Red
+            }
+        "
+        ));
+
+        // Duplicate init blocks
+        assert_debug_snapshot!(parse_mach_err(
+            "
+            machine BadMachine {
+                init() -> BadMachine { Red }
+                init() -> BadMachine { Blue }
+            }
+        "
+        ));
+    }
+}

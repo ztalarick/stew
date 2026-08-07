@@ -1,0 +1,31 @@
+---
+source: crates/stew-parser/src/statement.rs
+expression: "parse_stmt(\"choice Option { | Some(int) | None }\")"
+---
+Spanned {
+    node: ChoiceDefinition {
+        name: "Option",
+        choices: [
+            ChoiceVariant {
+                name: "Some",
+                types: [
+                    Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 23,
+                            end: 26,
+                        },
+                    },
+                ],
+            },
+            ChoiceVariant {
+                name: "None",
+                types: [],
+            },
+        ],
+    },
+    span: Span {
+        start: 0,
+        end: 36,
+    },
+}

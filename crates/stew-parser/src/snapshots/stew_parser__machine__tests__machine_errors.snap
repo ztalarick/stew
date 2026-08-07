@@ -1,0 +1,14 @@
+---
+source: crates/stew-parser/src/machine.rs
+expression: "parse_mach_err(\"\n            machine BadMachine {\n                state Red\n            }\n        \")"
+---
+ParseError {
+    message: "A state machine must have an initialization block",
+    err_span: SourceSpan {
+        offset: SourceOffset(
+            32,
+        ),
+        length: 41,
+    },
+    label: "Add an `init` block here",
+}

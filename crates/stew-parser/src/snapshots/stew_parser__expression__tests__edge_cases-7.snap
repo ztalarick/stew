@@ -1,0 +1,32 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"(1, \\\"hello\\\")\")"
+---
+Spanned {
+    node: Tuple(
+        [
+            Spanned {
+                node: Int(
+                    1,
+                ),
+                span: Span {
+                    start: 19,
+                    end: 20,
+                },
+            },
+            Spanned {
+                node: Str(
+                    "\"hello\"",
+                ),
+                span: Span {
+                    start: 22,
+                    end: 29,
+                },
+            },
+        ],
+    ),
+    span: Span {
+        start: 18,
+        end: 30,
+    },
+}

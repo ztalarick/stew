@@ -1,0 +1,81 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"if x > 5 { 1 } else { 0 }\")"
+---
+Spanned {
+    node: If {
+        condition: Spanned {
+            node: Binary {
+                op: GreaterThan,
+                left: Spanned {
+                    node: Identifier(
+                        "x",
+                    ),
+                    span: Span {
+                        start: 21,
+                        end: 22,
+                    },
+                },
+                right: Spanned {
+                    node: Identifier(
+                        "x",
+                    ),
+                    span: Span {
+                        start: 21,
+                        end: 22,
+                    },
+                },
+            },
+            span: Span {
+                start: 21,
+                end: 26,
+            },
+        },
+        consequence: Spanned {
+            node: Block {
+                statements: [],
+                final_expression: Some(
+                    Spanned {
+                        node: Int(
+                            1,
+                        ),
+                        span: Span {
+                            start: 29,
+                            end: 30,
+                        },
+                    },
+                ),
+            },
+            span: Span {
+                start: 27,
+                end: 32,
+            },
+        },
+        alternative: Some(
+            Spanned {
+                node: Block {
+                    statements: [],
+                    final_expression: Some(
+                        Spanned {
+                            node: Int(
+                                0,
+                            ),
+                            span: Span {
+                                start: 40,
+                                end: 41,
+                            },
+                        },
+                    ),
+                },
+                span: Span {
+                    start: 38,
+                    end: 43,
+                },
+            },
+        ),
+    },
+    span: Span {
+        start: 18,
+        end: 43,
+    },
+}

@@ -1,0 +1,32 @@
+---
+source: crates/stew-parser/src/statement.rs
+expression: "parse_stmt(\"let x: int = 5;\")"
+---
+Spanned {
+    node: LetDeclaration {
+        declaration: TypedIdentifier {
+            is_mut: false,
+            name: "x",
+            var_type: Spanned {
+                node: Int,
+                span: Span {
+                    start: 7,
+                    end: 10,
+                },
+            },
+        },
+        value: Spanned {
+            node: Int(
+                5,
+            ),
+            span: Span {
+                start: 13,
+                end: 14,
+            },
+        },
+    },
+    span: Span {
+        start: 0,
+        end: 15,
+    },
+}

@@ -1,0 +1,52 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"(x: int) -> x + 1\")"
+---
+Spanned {
+    node: AnonymousFunction {
+        parameters: [
+            TypedIdentifier {
+                is_mut: false,
+                name: "x",
+                var_type: Spanned {
+                    node: Int,
+                    span: Span {
+                        start: 22,
+                        end: 25,
+                    },
+                },
+            },
+        ],
+        body: Spanned {
+            node: Binary {
+                op: Add,
+                left: Spanned {
+                    node: Identifier(
+                        "x",
+                    ),
+                    span: Span {
+                        start: 30,
+                        end: 31,
+                    },
+                },
+                right: Spanned {
+                    node: Identifier(
+                        "x",
+                    ),
+                    span: Span {
+                        start: 30,
+                        end: 31,
+                    },
+                },
+            },
+            span: Span {
+                start: 30,
+                end: 35,
+            },
+        },
+    },
+    span: Span {
+        start: 18,
+        end: 35,
+    },
+}

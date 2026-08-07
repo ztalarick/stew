@@ -1,0 +1,38 @@
+---
+source: crates/stew-parser/src/expression.rs
+expression: "parse_expr(\"{ id: 1, name: \\\"test\\\" }\")"
+---
+Spanned {
+    node: Struct {
+        fields: [
+            (
+                "id",
+                Spanned {
+                    node: Int(
+                        1,
+                    ),
+                    span: Span {
+                        start: 24,
+                        end: 25,
+                    },
+                },
+            ),
+            (
+                "name",
+                Spanned {
+                    node: Str(
+                        "\"test\"",
+                    ),
+                    span: Span {
+                        start: 33,
+                        end: 39,
+                    },
+                },
+            ),
+        ],
+    },
+    span: Span {
+        start: 18,
+        end: 41,
+    },
+}

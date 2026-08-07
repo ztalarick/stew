@@ -1,0 +1,2402 @@
+---
+source: crates/stew-parser/tests/integration_tests.rs
+expression: program
+---
+Program {
+    statements: [
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "hello_world",
+                    var_type: Spanned {
+                        node: Str,
+                        span: Span {
+                            start: 17,
+                            end: 20,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Str(
+                        "\"Hello World!\"",
+                    ),
+                    span: Span {
+                        start: 23,
+                        end: 37,
+                    },
+                },
+            },
+            span: Span {
+                start: 0,
+                end: 38,
+            },
+        },
+        Spanned {
+            node: ExprStatement(
+                Spanned {
+                    node: Call {
+                        callable: Spanned {
+                            node: Identifier(
+                                "print",
+                            ),
+                            span: Span {
+                                start: 39,
+                                end: 44,
+                            },
+                        },
+                        arguments: [
+                            Spanned {
+                                node: Identifier(
+                                    "hello_world",
+                                ),
+                                span: Span {
+                                    start: 45,
+                                    end: 56,
+                                },
+                            },
+                        ],
+                    },
+                    span: Span {
+                        start: 39,
+                        end: 57,
+                    },
+                },
+            ),
+            span: Span {
+                start: 39,
+                end: 57,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "echo",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "x",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 72,
+                                end: 75,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Int,
+                    span: Span {
+                        start: 80,
+                        end: 83,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Identifier(
+                                    "x",
+                                ),
+                                span: Span {
+                                    start: 90,
+                                    end: 91,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 84,
+                        end: 93,
+                    },
+                },
+            },
+            span: Span {
+                start: 60,
+                end: 93,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "add",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "x",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 106,
+                                end: 109,
+                            },
+                        },
+                    },
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "y",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 114,
+                                end: 117,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Int,
+                    span: Span {
+                        start: 122,
+                        end: 125,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Binary {
+                                    op: Add,
+                                    left: Spanned {
+                                        node: Identifier(
+                                            "x",
+                                        ),
+                                        span: Span {
+                                            start: 132,
+                                            end: 133,
+                                        },
+                                    },
+                                    right: Spanned {
+                                        node: Identifier(
+                                            "x",
+                                        ),
+                                        span: Span {
+                                            start: 132,
+                                            end: 133,
+                                        },
+                                    },
+                                },
+                                span: Span {
+                                    start: 132,
+                                    end: 137,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 126,
+                        end: 139,
+                    },
+                },
+            },
+            span: Span {
+                start: 95,
+                end: 139,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "subtract",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "x",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 157,
+                                end: 160,
+                            },
+                        },
+                    },
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "y",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 165,
+                                end: 168,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Int,
+                    span: Span {
+                        start: 173,
+                        end: 176,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Binary {
+                                    op: Subtract,
+                                    left: Spanned {
+                                        node: Identifier(
+                                            "x",
+                                        ),
+                                        span: Span {
+                                            start: 183,
+                                            end: 184,
+                                        },
+                                    },
+                                    right: Spanned {
+                                        node: Identifier(
+                                            "x",
+                                        ),
+                                        span: Span {
+                                            start: 183,
+                                            end: 184,
+                                        },
+                                    },
+                                },
+                                span: Span {
+                                    start: 183,
+                                    end: 188,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 177,
+                        end: 190,
+                    },
+                },
+            },
+            span: Span {
+                start: 141,
+                end: 190,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "negation",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "x",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 208,
+                                end: 211,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Int,
+                    span: Span {
+                        start: 216,
+                        end: 219,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Binary {
+                                    op: Multiply,
+                                    left: Spanned {
+                                        node: Identifier(
+                                            "x",
+                                        ),
+                                        span: Span {
+                                            start: 258,
+                                            end: 259,
+                                        },
+                                    },
+                                    right: Spanned {
+                                        node: Identifier(
+                                            "x",
+                                        ),
+                                        span: Span {
+                                            start: 258,
+                                            end: 259,
+                                        },
+                                    },
+                                },
+                                span: Span {
+                                    start: 258,
+                                    end: 274,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 220,
+                        end: 276,
+                    },
+                },
+            },
+            span: Span {
+                start: 192,
+                end: 276,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "my_not",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "b",
+                        var_type: Spanned {
+                            node: Bool,
+                            span: Span {
+                                start: 292,
+                                end: 296,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Bool,
+                    span: Span {
+                        start: 301,
+                        end: 305,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Unary {
+                                    op: Not,
+                                    operand: Spanned {
+                                        node: Identifier(
+                                            "b",
+                                        ),
+                                        span: Span {
+                                            start: 316,
+                                            end: 317,
+                                        },
+                                    },
+                                },
+                                span: Span {
+                                    start: 312,
+                                    end: 317,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 306,
+                        end: 319,
+                    },
+                },
+            },
+            span: Span {
+                start: 278,
+                end: 319,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "x",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 328,
+                            end: 331,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Int(
+                        1,
+                    ),
+                    span: Span {
+                        start: 334,
+                        end: 335,
+                    },
+                },
+            },
+            span: Span {
+                start: 321,
+                end: 336,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "y",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 344,
+                            end: 347,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Int(
+                        2,
+                    ),
+                    span: Span {
+                        start: 350,
+                        end: 351,
+                    },
+                },
+            },
+            span: Span {
+                start: 337,
+                end: 352,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "pi",
+                    var_type: Spanned {
+                        node: F64,
+                        span: Span {
+                            start: 361,
+                            end: 364,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Float(
+                        3.14,
+                    ),
+                    span: Span {
+                        start: 367,
+                        end: 371,
+                    },
+                },
+            },
+            span: Span {
+                start: 353,
+                end: 372,
+            },
+        },
+        Spanned {
+            node: ExprStatement(
+                Spanned {
+                    node: Call {
+                        callable: Spanned {
+                            node: Identifier(
+                                "negation",
+                            ),
+                            span: Span {
+                                start: 374,
+                                end: 382,
+                            },
+                        },
+                        arguments: [
+                            Spanned {
+                                node: Int(
+                                    2,
+                                ),
+                                span: Span {
+                                    start: 383,
+                                    end: 384,
+                                },
+                            },
+                        ],
+                    },
+                    span: Span {
+                        start: 374,
+                        end: 385,
+                    },
+                },
+            ),
+            span: Span {
+                start: 374,
+                end: 385,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "does_work",
+                    var_type: Spanned {
+                        node: Bool,
+                        span: Span {
+                            start: 403,
+                            end: 407,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Bool(
+                        true,
+                    ),
+                    span: Span {
+                        start: 410,
+                        end: 414,
+                    },
+                },
+            },
+            span: Span {
+                start: 388,
+                end: 415,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "does_not_work",
+                    var_type: Spanned {
+                        node: Bool,
+                        span: Span {
+                            start: 436,
+                            end: 440,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Call {
+                        callable: Spanned {
+                            node: Identifier(
+                                "my_not",
+                            ),
+                            span: Span {
+                                start: 443,
+                                end: 449,
+                            },
+                        },
+                        arguments: [
+                            Spanned {
+                                node: Identifier(
+                                    "does_work",
+                                ),
+                                span: Span {
+                                    start: 450,
+                                    end: 459,
+                                },
+                            },
+                        ],
+                    },
+                    span: Span {
+                        start: 443,
+                        end: 460,
+                    },
+                },
+            },
+            span: Span {
+                start: 417,
+                end: 461,
+            },
+        },
+        Spanned {
+            node: ExprStatement(
+                Spanned {
+                    node: Call {
+                        callable: Spanned {
+                            node: Identifier(
+                                "echo",
+                            ),
+                            span: Span {
+                                start: 463,
+                                end: 467,
+                            },
+                        },
+                        arguments: [
+                            Spanned {
+                                node: Identifier(
+                                    "x",
+                                ),
+                                span: Span {
+                                    start: 468,
+                                    end: 469,
+                                },
+                            },
+                        ],
+                    },
+                    span: Span {
+                        start: 463,
+                        end: 470,
+                    },
+                },
+            ),
+            span: Span {
+                start: 463,
+                end: 470,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "a",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 480,
+                            end: 483,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Int(
+                        5,
+                    ),
+                    span: Span {
+                        start: 486,
+                        end: 487,
+                    },
+                },
+            },
+            span: Span {
+                start: 473,
+                end: 488,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "b",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 496,
+                            end: 499,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Int(
+                        10,
+                    ),
+                    span: Span {
+                        start: 502,
+                        end: 504,
+                    },
+                },
+            },
+            span: Span {
+                start: 489,
+                end: 505,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "result",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 518,
+                            end: 521,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Binary {
+                        op: Add,
+                        left: Spanned {
+                            node: Identifier(
+                                "a",
+                            ),
+                            span: Span {
+                                start: 524,
+                                end: 525,
+                            },
+                        },
+                        right: Spanned {
+                            node: Identifier(
+                                "a",
+                            ),
+                            span: Span {
+                                start: 524,
+                                end: 525,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 524,
+                        end: 533,
+                    },
+                },
+            },
+            span: Span {
+                start: 506,
+                end: 534,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "logic",
+                    var_type: Spanned {
+                        node: Bool,
+                        span: Span {
+                            start: 546,
+                            end: 550,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Binary {
+                        op: BooleanAnd,
+                        left: Spanned {
+                            node: Binary {
+                                op: LessThan,
+                                left: Spanned {
+                                    node: Identifier(
+                                        "a",
+                                    ),
+                                    span: Span {
+                                        start: 553,
+                                        end: 554,
+                                    },
+                                },
+                                right: Spanned {
+                                    node: Identifier(
+                                        "a",
+                                    ),
+                                    span: Span {
+                                        start: 553,
+                                        end: 554,
+                                    },
+                                },
+                            },
+                            span: Span {
+                                start: 553,
+                                end: 558,
+                            },
+                        },
+                        right: Spanned {
+                            node: Binary {
+                                op: LessThan,
+                                left: Spanned {
+                                    node: Identifier(
+                                        "a",
+                                    ),
+                                    span: Span {
+                                        start: 553,
+                                        end: 554,
+                                    },
+                                },
+                                right: Spanned {
+                                    node: Identifier(
+                                        "a",
+                                    ),
+                                    span: Span {
+                                        start: 553,
+                                        end: 554,
+                                    },
+                                },
+                            },
+                            span: Span {
+                                start: 553,
+                                end: 558,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 553,
+                        end: 572,
+                    },
+                },
+            },
+            span: Span {
+                start: 535,
+                end: 573,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "bit_shift",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 589,
+                            end: 592,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Binary {
+                        op: BitwiseOr,
+                        left: Spanned {
+                            node: Binary {
+                                op: LeftShift,
+                                left: Spanned {
+                                    node: Int(
+                                        1,
+                                    ),
+                                    span: Span {
+                                        start: 595,
+                                        end: 596,
+                                    },
+                                },
+                                right: Spanned {
+                                    node: Int(
+                                        1,
+                                    ),
+                                    span: Span {
+                                        start: 595,
+                                        end: 596,
+                                    },
+                                },
+                            },
+                            span: Span {
+                                start: 595,
+                                end: 601,
+                            },
+                        },
+                        right: Spanned {
+                            node: Binary {
+                                op: LeftShift,
+                                left: Spanned {
+                                    node: Int(
+                                        1,
+                                    ),
+                                    span: Span {
+                                        start: 595,
+                                        end: 596,
+                                    },
+                                },
+                                right: Spanned {
+                                    node: Int(
+                                        1,
+                                    ),
+                                    span: Span {
+                                        start: 595,
+                                        end: 596,
+                                    },
+                                },
+                            },
+                            span: Span {
+                                start: 595,
+                                end: 601,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 595,
+                        end: 605,
+                    },
+                },
+            },
+            span: Span {
+                start: 574,
+                end: 606,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "strs",
+                    var_type: Spanned {
+                        node: Array {
+                            item: Spanned {
+                                node: Str,
+                                span: Span {
+                                    start: 663,
+                                    end: 666,
+                                },
+                            },
+                            length: Some(
+                                4,
+                            ),
+                        },
+                        span: Span {
+                            start: 662,
+                            end: 670,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Array(
+                        [
+                            Spanned {
+                                node: Str(
+                                    "\"My\"",
+                                ),
+                                span: Span {
+                                    start: 674,
+                                    end: 678,
+                                },
+                            },
+                            Spanned {
+                                node: Str(
+                                    "\"name\"",
+                                ),
+                                span: Span {
+                                    start: 680,
+                                    end: 686,
+                                },
+                            },
+                            Spanned {
+                                node: Str(
+                                    "\"is\"",
+                                ),
+                                span: Span {
+                                    start: 688,
+                                    end: 692,
+                                },
+                            },
+                            Spanned {
+                                node: Str(
+                                    "\"Zach\"",
+                                ),
+                                span: Span {
+                                    start: 694,
+                                    end: 700,
+                                },
+                            },
+                        ],
+                    ),
+                    span: Span {
+                        start: 673,
+                        end: 701,
+                    },
+                },
+            },
+            span: Span {
+                start: 652,
+                end: 702,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "range_five",
+                parameters: [],
+                return_type: Spanned {
+                    node: Array {
+                        item: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 725,
+                                end: 728,
+                            },
+                        },
+                        length: Some(
+                            5,
+                        ),
+                    },
+                    span: Span {
+                        start: 724,
+                        end: 732,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: None,
+                    },
+                    span: Span {
+                        start: 733,
+                        end: 757,
+                    },
+                },
+            },
+            span: Span {
+                start: 704,
+                end: 757,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "empty",
+                    var_type: Spanned {
+                        node: Array {
+                            item: Spanned {
+                                node: Int,
+                                span: Span {
+                                    start: 771,
+                                    end: 774,
+                                },
+                            },
+                            length: Some(
+                                0,
+                            ),
+                        },
+                        span: Span {
+                            start: 770,
+                            end: 778,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Array(
+                        [],
+                    ),
+                    span: Span {
+                        start: 781,
+                        end: 783,
+                    },
+                },
+            },
+            span: Span {
+                start: 759,
+                end: 784,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "one",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 795,
+                            end: 798,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: ArrayIndex {
+                        target: Spanned {
+                            node: Identifier(
+                                "nums",
+                            ),
+                            span: Span {
+                                start: 801,
+                                end: 805,
+                            },
+                        },
+                        index: Spanned {
+                            node: Int(
+                                0,
+                            ),
+                            span: Span {
+                                start: 806,
+                                end: 807,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 801,
+                        end: 808,
+                    },
+                },
+            },
+            span: Span {
+                start: 786,
+                end: 809,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "two",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 820,
+                            end: 823,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: ArrayIndex {
+                        target: Spanned {
+                            node: Call {
+                                callable: Spanned {
+                                    node: Identifier(
+                                        "range_five",
+                                    ),
+                                    span: Span {
+                                        start: 826,
+                                        end: 836,
+                                    },
+                                },
+                                arguments: [],
+                            },
+                            span: Span {
+                                start: 826,
+                                end: 838,
+                            },
+                        },
+                        index: Spanned {
+                            node: Call {
+                                callable: Spanned {
+                                    node: Identifier(
+                                        "add",
+                                    ),
+                                    span: Span {
+                                        start: 839,
+                                        end: 842,
+                                    },
+                                },
+                                arguments: [
+                                    Spanned {
+                                        node: Int(
+                                            1,
+                                        ),
+                                        span: Span {
+                                            start: 843,
+                                            end: 844,
+                                        },
+                                    },
+                                    Spanned {
+                                        node: Int(
+                                            0,
+                                        ),
+                                        span: Span {
+                                            start: 846,
+                                            end: 847,
+                                        },
+                                    },
+                                ],
+                            },
+                            span: Span {
+                                start: 839,
+                                end: 848,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 826,
+                        end: 849,
+                    },
+                },
+            },
+            span: Span {
+                start: 811,
+                end: 850,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "point",
+                    var_type: Spanned {
+                        node: Tuple(
+                            [
+                                Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 874,
+                                        end: 877,
+                                    },
+                                },
+                                Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 879,
+                                        end: 882,
+                                    },
+                                },
+                            ],
+                        ),
+                        span: Span {
+                            start: 873,
+                            end: 883,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Tuple(
+                        [
+                            Spanned {
+                                node: Int(
+                                    5,
+                                ),
+                                span: Span {
+                                    start: 887,
+                                    end: 888,
+                                },
+                            },
+                            Spanned {
+                                node: Int(
+                                    4,
+                                ),
+                                span: Span {
+                                    start: 890,
+                                    end: 891,
+                                },
+                            },
+                        ],
+                    ),
+                    span: Span {
+                        start: 886,
+                        end: 892,
+                    },
+                },
+            },
+            span: Span {
+                start: 862,
+                end: 893,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "origin",
+                parameters: [],
+                return_type: Spanned {
+                    node: Tuple(
+                        [
+                            Spanned {
+                                node: Int,
+                                span: Span {
+                                    start: 912,
+                                    end: 915,
+                                },
+                            },
+                            Spanned {
+                                node: Int,
+                                span: Span {
+                                    start: 917,
+                                    end: 920,
+                                },
+                            },
+                        ],
+                    ),
+                    span: Span {
+                        start: 911,
+                        end: 921,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Tuple(
+                                    [
+                                        Spanned {
+                                            node: Int(
+                                                0,
+                                            ),
+                                            span: Span {
+                                                start: 929,
+                                                end: 930,
+                                            },
+                                        },
+                                        Spanned {
+                                            node: Int(
+                                                0,
+                                            ),
+                                            span: Span {
+                                                start: 932,
+                                                end: 933,
+                                            },
+                                        },
+                                    ],
+                                ),
+                                span: Span {
+                                    start: 928,
+                                    end: 934,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 922,
+                        end: 936,
+                    },
+                },
+            },
+            span: Span {
+                start: 895,
+                end: 936,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "nothing",
+                parameters: [],
+                return_type: Spanned {
+                    node: Tuple(
+                        [],
+                    ),
+                    span: Span {
+                        start: 955,
+                        end: 957,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: None,
+                    },
+                    span: Span {
+                        start: 958,
+                        end: 962,
+                    },
+                },
+            },
+            span: Span {
+                start: 938,
+                end: 962,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "unittype",
+                    var_type: Spanned {
+                        node: Tuple(
+                            [],
+                        ),
+                        span: Span {
+                            start: 978,
+                            end: 980,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Tuple(
+                        [],
+                    ),
+                    span: Span {
+                        start: 983,
+                        end: 985,
+                    },
+                },
+            },
+            span: Span {
+                start: 964,
+                end: 986,
+            },
+        },
+        Spanned {
+            node: StructDefinition {
+                name: "UserData",
+                field_types: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "id",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 1026,
+                                end: 1029,
+                            },
+                        },
+                    },
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "name",
+                        var_type: Spanned {
+                            node: Str,
+                            span: Span {
+                                start: 1041,
+                                end: 1044,
+                            },
+                        },
+                    },
+                ],
+            },
+            span: Span {
+                start: 1000,
+                end: 1046,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "henry",
+                    var_type: Spanned {
+                        node: Custom(
+                            "UserData",
+                        ),
+                        span: Span {
+                            start: 1059,
+                            end: 1067,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Struct {
+                        fields: [
+                            (
+                                "id",
+                                Spanned {
+                                    node: Int(
+                                        1,
+                                    ),
+                                    span: Span {
+                                        start: 1075,
+                                        end: 1076,
+                                    },
+                                },
+                            ),
+                            (
+                                "name",
+                                Spanned {
+                                    node: Str(
+                                        "\"henry\"",
+                                    ),
+                                    span: Span {
+                                        start: 1084,
+                                        end: 1091,
+                                    },
+                                },
+                            ),
+                        ],
+                    },
+                    span: Span {
+                        start: 1070,
+                        end: 1092,
+                    },
+                },
+            },
+            span: Span {
+                start: 1048,
+                end: 1093,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "henrys_name",
+                    var_type: Spanned {
+                        node: Str,
+                        span: Span {
+                            start: 1111,
+                            end: 1114,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Field {
+                        target: Spanned {
+                            node: Identifier(
+                                "henry",
+                            ),
+                            span: Span {
+                                start: 1117,
+                                end: 1122,
+                            },
+                        },
+                        field: Named(
+                            "name",
+                        ),
+                    },
+                    span: Span {
+                        start: 1117,
+                        end: 1127,
+                    },
+                },
+            },
+            span: Span {
+                start: 1094,
+                end: 1128,
+            },
+        },
+        Spanned {
+            node: ChoiceDefinition {
+                name: "OptionInt",
+                choices: [
+                    ChoiceVariant {
+                        name: "SomeInt",
+                        types: [
+                            Spanned {
+                                node: Int,
+                                span: Span {
+                                    start: 1175,
+                                    end: 1178,
+                                },
+                            },
+                        ],
+                    },
+                    ChoiceVariant {
+                        name: "None",
+                        types: [],
+                    },
+                ],
+            },
+            span: Span {
+                start: 1142,
+                end: 1192,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "divide",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "x",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 1208,
+                                end: 1211,
+                            },
+                        },
+                    },
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "y",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 1216,
+                                end: 1219,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Custom(
+                        "OptionInt",
+                    ),
+                    span: Span {
+                        start: 1224,
+                        end: 1233,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Call {
+                                    callable: Spanned {
+                                        node: Field {
+                                            target: Spanned {
+                                                node: Identifier(
+                                                    "OptionInt",
+                                                ),
+                                                span: Span {
+                                                    start: 1291,
+                                                    end: 1300,
+                                                },
+                                            },
+                                            field: Named(
+                                                "Some",
+                                            ),
+                                        },
+                                        span: Span {
+                                            start: 1291,
+                                            end: 1305,
+                                        },
+                                    },
+                                    arguments: [
+                                        Spanned {
+                                            node: Binary {
+                                                op: Divide,
+                                                left: Spanned {
+                                                    node: Identifier(
+                                                        "x",
+                                                    ),
+                                                    span: Span {
+                                                        start: 1306,
+                                                        end: 1307,
+                                                    },
+                                                },
+                                                right: Spanned {
+                                                    node: Identifier(
+                                                        "x",
+                                                    ),
+                                                    span: Span {
+                                                        start: 1306,
+                                                        end: 1307,
+                                                    },
+                                                },
+                                            },
+                                            span: Span {
+                                                start: 1306,
+                                                end: 1311,
+                                            },
+                                        },
+                                    ],
+                                },
+                                span: Span {
+                                    start: 1291,
+                                    end: 1312,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 1234,
+                        end: 1314,
+                    },
+                },
+            },
+            span: Span {
+                start: 1194,
+                end: 1314,
+            },
+        },
+        Spanned {
+            node: Function {
+                name: "print_divide",
+                parameters: [
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "x",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 1336,
+                                end: 1339,
+                            },
+                        },
+                    },
+                    TypedIdentifier {
+                        is_mut: false,
+                        name: "y",
+                        var_type: Spanned {
+                            node: Int,
+                            span: Span {
+                                start: 1344,
+                                end: 1347,
+                            },
+                        },
+                    },
+                ],
+                return_type: Spanned {
+                    node: Tuple(
+                        [],
+                    ),
+                    span: Span {
+                        start: 1352,
+                        end: 1354,
+                    },
+                },
+                body: Spanned {
+                    node: Block {
+                        statements: [],
+                        final_expression: Some(
+                            Spanned {
+                                node: Match {
+                                    target: Spanned {
+                                        node: Call {
+                                            callable: Spanned {
+                                                node: Identifier(
+                                                    "divide",
+                                                ),
+                                                span: Span {
+                                                    start: 1367,
+                                                    end: 1373,
+                                                },
+                                            },
+                                            arguments: [
+                                                Spanned {
+                                                    node: Int(
+                                                        20,
+                                                    ),
+                                                    span: Span {
+                                                        start: 1374,
+                                                        end: 1376,
+                                                    },
+                                                },
+                                                Spanned {
+                                                    node: Int(
+                                                        5,
+                                                    ),
+                                                    span: Span {
+                                                        start: 1378,
+                                                        end: 1379,
+                                                    },
+                                                },
+                                            ],
+                                        },
+                                        span: Span {
+                                            start: 1367,
+                                            end: 1380,
+                                        },
+                                    },
+                                    options: [
+                                        MatchCase {
+                                            pattern: Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "Some",
+                                                        ),
+                                                        span: Span {
+                                                            start: 1393,
+                                                            end: 1397,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "result",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1398,
+                                                                end: 1404,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 1393,
+                                                    end: 1405,
+                                                },
+                                            },
+                                            guard: None,
+                                            body: Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "print",
+                                                        ),
+                                                        span: Span {
+                                                            start: 1409,
+                                                            end: 1414,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Identifier(
+                                                                "result",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1415,
+                                                                end: 1421,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 1409,
+                                                    end: 1422,
+                                                },
+                                            },
+                                        },
+                                        MatchCase {
+                                            pattern: Spanned {
+                                                node: Identifier(
+                                                    "None",
+                                                ),
+                                                span: Span {
+                                                    start: 1433,
+                                                    end: 1437,
+                                                },
+                                            },
+                                            guard: None,
+                                            body: Spanned {
+                                                node: Call {
+                                                    callable: Spanned {
+                                                        node: Identifier(
+                                                            "print",
+                                                        ),
+                                                        span: Span {
+                                                            start: 1441,
+                                                            end: 1446,
+                                                        },
+                                                    },
+                                                    arguments: [
+                                                        Spanned {
+                                                            node: Str(
+                                                                "\"Can't divide by zero!\"",
+                                                            ),
+                                                            span: Span {
+                                                                start: 1447,
+                                                                end: 1470,
+                                                            },
+                                                        },
+                                                    ],
+                                                },
+                                                span: Span {
+                                                    start: 1441,
+                                                    end: 1471,
+                                                },
+                                            },
+                                        },
+                                    ],
+                                },
+                                span: Span {
+                                    start: 1361,
+                                    end: 1477,
+                                },
+                            },
+                        ),
+                    },
+                    span: Span {
+                        start: 1355,
+                        end: 1479,
+                    },
+                },
+            },
+            span: Span {
+                start: 1316,
+                end: 1479,
+            },
+        },
+        Spanned {
+            node: ExprStatement(
+                Spanned {
+                    node: Call {
+                        callable: Spanned {
+                            node: Identifier(
+                                "print_divide",
+                            ),
+                            span: Span {
+                                start: 1481,
+                                end: 1493,
+                            },
+                        },
+                        arguments: [
+                            Spanned {
+                                node: Binary {
+                                    op: Divide,
+                                    left: Spanned {
+                                        node: Int(
+                                            5,
+                                        ),
+                                        span: Span {
+                                            start: 1494,
+                                            end: 1495,
+                                        },
+                                    },
+                                    right: Spanned {
+                                        node: Int(
+                                            5,
+                                        ),
+                                        span: Span {
+                                            start: 1494,
+                                            end: 1495,
+                                        },
+                                    },
+                                },
+                                span: Span {
+                                    start: 1494,
+                                    end: 1499,
+                                },
+                            },
+                        ],
+                    },
+                    span: Span {
+                        start: 1481,
+                        end: 1500,
+                    },
+                },
+            ),
+            span: Span {
+                start: 1481,
+                end: 1500,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "ref",
+                    var_type: Spanned {
+                        node: Reference {
+                            is_mut: false,
+                            is_shared: false,
+                            inner: Spanned {
+                                node: Int,
+                                span: Span {
+                                    start: 1527,
+                                    end: 1530,
+                                },
+                            },
+                        },
+                        span: Span {
+                            start: 1526,
+                            end: 1530,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: AddressOf {
+                        is_mut: false,
+                        target: Spanned {
+                            node: Identifier(
+                                "x",
+                            ),
+                            span: Span {
+                                start: 1534,
+                                end: 1535,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 1533,
+                        end: 1535,
+                    },
+                },
+            },
+            span: Span {
+                start: 1517,
+                end: 1536,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "mult",
+                    var_type: Spanned {
+                        node: Function {
+                            arguments: [],
+                            return_type: Spanned {
+                                node: Int,
+                                span: Span {
+                                    start: 1584,
+                                    end: 1587,
+                                },
+                            },
+                        },
+                        span: Span {
+                            start: 1570,
+                            end: 1587,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: AnonymousFunction {
+                        parameters: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "x",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 1594,
+                                        end: 1597,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "y",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 1602,
+                                        end: 1605,
+                                    },
+                                },
+                            },
+                        ],
+                        body: Spanned {
+                            node: Binary {
+                                op: Multiply,
+                                left: Spanned {
+                                    node: Identifier(
+                                        "x",
+                                    ),
+                                    span: Span {
+                                        start: 1610,
+                                        end: 1611,
+                                    },
+                                },
+                                right: Spanned {
+                                    node: Identifier(
+                                        "x",
+                                    ),
+                                    span: Span {
+                                        start: 1610,
+                                        end: 1611,
+                                    },
+                                },
+                            },
+                            span: Span {
+                                start: 1610,
+                                end: 1615,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 1590,
+                        end: 1615,
+                    },
+                },
+            },
+            span: Span {
+                start: 1560,
+                end: 1616,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "nine",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 1628,
+                            end: 1631,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Call {
+                        callable: Spanned {
+                            node: Identifier(
+                                "mult",
+                            ),
+                            span: Span {
+                                start: 1634,
+                                end: 1638,
+                            },
+                        },
+                        arguments: [
+                            Spanned {
+                                node: Int(
+                                    3,
+                                ),
+                                span: Span {
+                                    start: 1639,
+                                    end: 1640,
+                                },
+                            },
+                            Spanned {
+                                node: Int(
+                                    3,
+                                ),
+                                span: Span {
+                                    start: 1642,
+                                    end: 1643,
+                                },
+                            },
+                        ],
+                    },
+                    span: Span {
+                        start: 1634,
+                        end: 1644,
+                    },
+                },
+            },
+            span: Span {
+                start: 1618,
+                end: 1645,
+            },
+        },
+        Spanned {
+            node: ExprStatement(
+                Spanned {
+                    node: For {
+                        bindings: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "i",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 1654,
+                                        end: 1657,
+                                    },
+                                },
+                            },
+                        ],
+                        iterator: Spanned {
+                            node: Call {
+                                callable: Spanned {
+                                    node: Identifier(
+                                        "rang_five",
+                                    ),
+                                    span: Span {
+                                        start: 1661,
+                                        end: 1670,
+                                    },
+                                },
+                                arguments: [],
+                            },
+                            span: Span {
+                                start: 1661,
+                                end: 1672,
+                            },
+                        },
+                        body: Spanned {
+                            node: Block {
+                                statements: [],
+                                final_expression: None,
+                            },
+                            span: Span {
+                                start: 1673,
+                                end: 1690,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 1647,
+                        end: 1690,
+                    },
+                },
+            ),
+            span: Span {
+                start: 1647,
+                end: 1690,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "i",
+                    var_type: Spanned {
+                        node: Int,
+                        span: Span {
+                            start: 1703,
+                            end: 1706,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Int(
+                        0,
+                    ),
+                    span: Span {
+                        start: 1709,
+                        end: 1710,
+                    },
+                },
+            },
+            span: Span {
+                start: 1692,
+                end: 1711,
+            },
+        },
+        Spanned {
+            node: ExprStatement(
+                Spanned {
+                    node: While {
+                        condition: Spanned {
+                            node: Bool(
+                                true,
+                            ),
+                            span: Span {
+                                start: 1718,
+                                end: 1722,
+                            },
+                        },
+                        body: Spanned {
+                            node: Block {
+                                statements: [],
+                                final_expression: None,
+                            },
+                            span: Span {
+                                start: 1723,
+                                end: 1805,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 1712,
+                        end: 1805,
+                    },
+                },
+            ),
+            span: Span {
+                start: 1712,
+                end: 1805,
+            },
+        },
+        Spanned {
+            node: LetDeclaration {
+                declaration: TypedIdentifier {
+                    is_mut: false,
+                    name: "price_items",
+                    var_type: Spanned {
+                        node: Array {
+                            item: Spanned {
+                                node: Tuple(
+                                    [
+                                        Spanned {
+                                            node: Str,
+                                            span: Span {
+                                                start: 1826,
+                                                end: 1829,
+                                            },
+                                        },
+                                        Spanned {
+                                            node: Int,
+                                            span: Span {
+                                                start: 1831,
+                                                end: 1834,
+                                            },
+                                        },
+                                    ],
+                                ),
+                                span: Span {
+                                    start: 1825,
+                                    end: 1835,
+                                },
+                            },
+                            length: Some(
+                                3,
+                            ),
+                        },
+                        span: Span {
+                            start: 1824,
+                            end: 1839,
+                        },
+                    },
+                },
+                value: Spanned {
+                    node: Array(
+                        [
+                            Spanned {
+                                node: Tuple(
+                                    [
+                                        Spanned {
+                                            node: Str(
+                                                "\"pogo_stick\"",
+                                            ),
+                                            span: Span {
+                                                start: 1844,
+                                                end: 1856,
+                                            },
+                                        },
+                                        Spanned {
+                                            node: Int(
+                                                15,
+                                            ),
+                                            span: Span {
+                                                start: 1858,
+                                                end: 1860,
+                                            },
+                                        },
+                                    ],
+                                ),
+                                span: Span {
+                                    start: 1843,
+                                    end: 1861,
+                                },
+                            },
+                            Spanned {
+                                node: Tuple(
+                                    [
+                                        Spanned {
+                                            node: Str(
+                                                "\"roller_skates\"",
+                                            ),
+                                            span: Span {
+                                                start: 1864,
+                                                end: 1879,
+                                            },
+                                        },
+                                        Spanned {
+                                            node: Int(
+                                                30,
+                                            ),
+                                            span: Span {
+                                                start: 1881,
+                                                end: 1883,
+                                            },
+                                        },
+                                    ],
+                                ),
+                                span: Span {
+                                    start: 1863,
+                                    end: 1884,
+                                },
+                            },
+                            Spanned {
+                                node: Tuple(
+                                    [
+                                        Spanned {
+                                            node: Str(
+                                                "\"keyboard\"",
+                                            ),
+                                            span: Span {
+                                                start: 1887,
+                                                end: 1897,
+                                            },
+                                        },
+                                        Spanned {
+                                            node: Int(
+                                                50,
+                                            ),
+                                            span: Span {
+                                                start: 1899,
+                                                end: 1901,
+                                            },
+                                        },
+                                    ],
+                                ),
+                                span: Span {
+                                    start: 1886,
+                                    end: 1902,
+                                },
+                            },
+                        ],
+                    ),
+                    span: Span {
+                        start: 1842,
+                        end: 1903,
+                    },
+                },
+            },
+            span: Span {
+                start: 1807,
+                end: 1904,
+            },
+        },
+        Spanned {
+            node: ExprStatement(
+                Spanned {
+                    node: For {
+                        bindings: [
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "item",
+                                var_type: Spanned {
+                                    node: Str,
+                                    span: Span {
+                                        start: 1916,
+                                        end: 1919,
+                                    },
+                                },
+                            },
+                            TypedIdentifier {
+                                is_mut: false,
+                                name: "price",
+                                var_type: Spanned {
+                                    node: Int,
+                                    span: Span {
+                                        start: 1928,
+                                        end: 1931,
+                                    },
+                                },
+                            },
+                        ],
+                        iterator: Spanned {
+                            node: Identifier(
+                                "price_items",
+                            ),
+                            span: Span {
+                                start: 1935,
+                                end: 1946,
+                            },
+                        },
+                        body: Spanned {
+                            node: Block {
+                                statements: [],
+                                final_expression: None,
+                            },
+                            span: Span {
+                                start: 1947,
+                                end: 2053,
+                            },
+                        },
+                    },
+                    span: Span {
+                        start: 1906,
+                        end: 2053,
+                    },
+                },
+            ),
+            span: Span {
+                start: 1906,
+                end: 2053,
+            },
+        },
+    ],
+}
