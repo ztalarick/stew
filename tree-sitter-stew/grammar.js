@@ -94,7 +94,7 @@ module.exports = grammar({
         $.machine_definition,
       ),
 
-    _expression_statement: ($) => seq($._expression, ";"),
+    _expression_statement: ($) => seq(field("expression", $._expression), ";"),
 
     _expression: ($) =>
       choice(
