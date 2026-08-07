@@ -40,7 +40,7 @@ fn execute_parse(file: String, print_cst: bool) -> Result<()> {
         let tree = stew_parser::parse_cst(&source)
             .ok_or_else(|| miette::miette!("Failed to parse source"))?;
         let raw_sexp = tree.root_node().to_sexp();
-        println!("{}", stew_parser::format_sexp(&raw_sexp));
+        println!("{}", format_sexp(&raw_sexp));
     } else {
         let program = stew_parser::parse(source)?;
 
@@ -54,4 +54,37 @@ fn execute_parse(file: String, print_cst: bool) -> Result<()> {
 fn execute_run(_file: String) -> Result<()> {
     println!("Interpreter not yet implemented!");
     Ok(())
+}
+
+fn format_sexp(sexp: &str) -> String {
+    let mut indent = 0;
+    let mut pretty = String::new();
+    let mut in_string = false;
+
+    for c in sexp.chars() {
+        match c {
+            // Don't format inside string literals
+            '"' => {
+                in_string = !in_string;
+                pretty.push('"');
+            }
+            '(' if !in_string => {
+                pretty.push('\n');
+                pretty.push_str(&"  ".repeat(indent)); // 2 spaces per indent
+                pretty.push('(');
+                indent += 1;
+            }
+            ')' if !in_string => {
+                indent = indent.saturating_sub(1);
+                pretty.push(')');
+            }
+            // Skip the space immediately following a closing paren,
+            // the newlines will handle spacing
+            ' ' if !in_string && pretty.ends_with(')') => {}
+            _ => pretty.push(c),
+        }
+    }
+
+    // Remove the very first newline that gets added
+    pretty.trim_start().to_string()
 }
