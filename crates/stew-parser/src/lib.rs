@@ -92,6 +92,3 @@ fn parse_program(node: tree_sitter::Node, source: &[u8]) -> Result<ast::Program,
         .collect::<Result<Vec<_>, ParseError>>()?;
     Ok(ast::Program { statements })
 }
-
-// things to fix:
-// 1. add tests :)
